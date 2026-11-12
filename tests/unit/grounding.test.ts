@@ -80,3 +80,18 @@ it("computes scoped literal ranges without endorsing model aggregates", () => {
   expect(result[0]?.maximum.value).toBe(71);
   expect(result[0]?.mentions).toBe(2);
 });
+
+it("does not borrow numeric support from a reference attached to another claim", () => {
+  const other = {
+    ...sources[0]!,
+    id: "s-other",
+    passages: [
+      { id: "s-other-p1", text: "The follow-up had 67 participants." },
+    ],
+  };
+  const audit = auditGrounding(
+    "The pilot had 67 participants [s-facts-p1]. The follow-up had 67 participants [s-other-p1].",
+    [...sources, other],
+  );
+  expect(audit.missingValues).toContain("67 participants");
+});

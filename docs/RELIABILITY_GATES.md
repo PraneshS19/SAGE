@@ -1,0 +1,5 @@
+# 0.1.3 reliability gates
+
+Set before the milestone evaluation. Each installed model is evaluated at the same 4,096-token context using the previous seven cases and three additional independent cases. The additional cases test exact table values, conflicting reports and absent information. Each must give the expected facts without invented values, scope changes or causal inference. Recognized structural references must resolve uniquely. Read the full outputs for relevance and support. A literal match is not an entailment score.
+
+All long cases must finish without unreported loss or output-limit markers and account for every map batch. Excerpt recovery must remain explicitly labeled and fit the approved plan without additional calls. Mark any unfinished final synthesis as partial. Deterministic tests, real Helium workflows, user data preservation, no unexpected extension traffic, and release checks must also pass. Live cloud and unavailable-model acceptance are separate gaps. If a mandatory gate fails, retain Functional Alpha.

@@ -1,3 +1,11 @@
+# 0.1.3 processing changes
+
+Direct and hierarchical planning still use effective provider context and output budgets. Intermediate outputs that exceed their byte or token limit can now be replaced with deterministic original excerpts. Each excerpt includes the original passage ID and exact text. Candidates are scoped to the failed step's selected passages, ranked with simple query-term and numeric signals, and packed inside the existing byte ceiling. Recovery is disclosed before consent and adds no model call. The excerpt set is selective and neither a complete fact index nor a semantic verifier. Provider errors still stop at the failed step. Final truncation preserves partial output and fails completion.
+
+The final synthesis sees scoped source excerpts where they fit. It no longer receives a pooled minimum or maximum across all sources. Literal extrema can be inspected separately in the UI, with scope limitations. Claim-local reference checks avoid accepting a number merely because another sentence cited it. Optional restart storage is off by default and stores one bounded credential-free checkpoint. Restore does not dispatch inference. The existing versioned settings and history schemas accept older records.
+
+---
+
 # Model and provider architecture
 
 SAGE plans from the selected model's configured context and capability metadata. The engine has no model-name or family branches. New installations start without a selected model. Existing v1 settings, keys and history retain their format, with optional profiles keyed by provider, endpoint and exact model ID.

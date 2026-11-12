@@ -104,6 +104,14 @@ describe("message and rendering boundaries", () => {
     expect(html).not.toContain("<img");
     expect(html).not.toContain("javascript:");
     expect(html).toContain('rel="noreferrer noopener"');
+    expect(
+      renderToStaticMarkup(
+        <Markdown
+          text="[model link](https://example.com)"
+          sourceLinks={false}
+        />,
+      ),
+    ).not.toContain("href=");
     expect(safeLink("data:text/html,secret")).toBeUndefined();
   });
 });

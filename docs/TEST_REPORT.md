@@ -1,3 +1,9 @@
+# 0.1.3 test report
+
+Current regression and package results are in [release verification](RELEASE_VERIFICATION.md). Real model outputs and quality gates are separate in [model evaluation](MODEL_EVALUATION.md). This document preserves historical reports below.
+
+---
+
 > For Functional Alpha 0.1.2, see [release verification](RELEASE_VERIFICATION.md). This report records the preceding architecture milestone.
 
 # v0.2 milestone verification, Functional alpha 0.1.1

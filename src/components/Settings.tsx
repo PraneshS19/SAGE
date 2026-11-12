@@ -600,6 +600,22 @@ $new = if ($current) { "$current,$origin" } else { $origin }
               passages and URLs. Disabling history does not delete previously
               saved conversations.
             </p>
+            <label className="check">
+              <input
+                type="checkbox"
+                checked={form.persistCheckpoints ?? false}
+                onChange={(e) =>
+                  setForm({ ...form, persistCheckpoints: e.target.checked })
+                }
+              />
+              Keep the latest batch job for restart recovery
+            </label>
+            <p className="muted">
+              Off by default. Saves selected source text and completed notes
+              locally, up to 1.5 MB. A checkpoint expires on next launch after
+              24 hours. Disable recovery or clear the session to delete it.
+              Resuming requires review.
+            </p>
             <label>
               Retention (days)
               <input

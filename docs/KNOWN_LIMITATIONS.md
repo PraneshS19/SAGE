@@ -1,3 +1,9 @@
+# 0.1.3 limitations
+
+Both local test models processed all three long fixtures. Final completion and factual fidelity still vary. Qwen reported incorrect extrema on two inputs, and Phi-3 hit the output limit on a third long case. Recovered evidence is selective. No semantic verifier guarantees source support. Unsupported or noncanonical citations can be missing or displayed as unverified. A latest-job checkpoint survives restart only with opt-in and within its size and age limits. GPT-OSS 120B and live cloud inference were unavailable for verification. See [model evaluation](MODEL_EVALUATION.md) and [release gates](RELIABILITY_GATES.md).
+
+---
+
 # Known limitations — Functional alpha 0.1.1
 
 - **Release blocker: long synthesis.** At 4K, Phi-3 stopped on all three long fixtures due to oversized notes or output limits. Qwen completed two and stopped during reduction on the largest after completing all five source batches. See MODEL_EVALUATION.md.

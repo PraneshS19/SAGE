@@ -1,0 +1,213 @@
+
+> sage-extension@0.1.3 release
+> npm run build && npm run verify:release
+
+
+> sage-extension@0.1.3 build
+> wxt build
+
+
+WXT 0.21.5
+i Building chrome-mv3 for production with Vite 8.3.7
+[?25l
+⠋ Preparing...[K
+⠋ [1/3] background[K
+⠙ [1/3] background[K
+⠹ [1/3] background[K
+⠸ [1/3] background[K
+⠼ [1/3] background[K
+⠴ [1/3] background[K
+⠴ [2/3] extract[K
+⠦ [2/3] extract[K
+⠧ [2/3] extract[K
+⠧ [3/3] options, popup, sidepanel[K
+⠇ [3/3] options, popup, sidepanel[K
+⠏ [3/3] options, popup, sidepanel[K
+⠋ [3/3] options, popup, sidepanel[K
+⠙ [3/3] options, popup, sidepanel[K
+⠹ [3/3] options, popup, sidepanel[K
+⠸ [3/3] options, popup, sidepanel[K
+⠼ [3/3] options, popup, sidepanel[K
+⠴ [3/3] options, popup, sidepanel[K
+⠦ [3/3] options, popup, sidepanel[K
+⠧ [3/3] options, popup, sidepanel[K
+⠇ [3/3] options, popup, sidepanel[K
+⠏ [3/3] options, popup, sidepanel[K
+⠋ [3/3] options, popup, sidepanel[K
+⠙ [3/3] options, popup, sidepanel[K
+⠹ [3/3] options, popup, sidepanel[K
+⠸ [3/3] options, popup, sidepanel[K
+⠼ [3/3] options, popup, sidepanel[K
+⠴ [3/3] options, popup, sidepanel[K
+⠦ [3/3] options, popup, sidepanel[K
+⠧ [3/3] options, popup, sidepanel[K
+⠇ [3/3] options, popup, sidepanel[K
+⠏ [3/3] options, popup, sidepanel[K
+⠋ [3/3] options, popup, sidepanel[K
+⠙ [3/3] options, popup, sidepanel[K
+⠹ [3/3] options, popup, sidepanel[K
+⠸ [3/3] options, popup, sidepanel[K
+⠼ [3/3] options, popup, sidepanel[K
+⠴ [3/3] options, popup, sidepanel[K
+⠦ [3/3] options, popup, sidepanel[K
+⠧ [3/3] options, popup, sidepanel[K
+⠇ [3/3] options, popup, sidepanel[K
+⠏ [3/3] options, popup, sidepanel[K
+⠋ [3/3] options, popup, sidepanel[K
+⠙ [3/3] options, popup, sidepanel[K
+⠹ [3/3] options, popup, sidepanel[K
+⠸ [3/3] options, popup, sidepanel[K
+⠼ [3/3] options, popup, sidepanel[K
+⠴ [3/3] options, popup, sidepanel[K
+⠦ [3/3] options, popup, sidepanel[K
+⠧ [3/3] options, popup, sidepanel[K
+⠇ [3/3] options, popup, sidepanel[K
+⠏ [3/3] options, popup, sidepanel[K
+⠋ [3/3] options, popup, sidepanel[K
+⠙ [3/3] options, popup, sidepanel[K
+⠹ [3/3] options, popup, sidepanel[K
+⠸ [3/3] options, popup, sidepanel[K
+⠼ [3/3] options, popup, sidepanel[K
+⠴ [3/3] options, popup, sidepanel[K
+⠦ [3/3] options, popup, sidepanel[K
+⠧ [3/3] options, popup, sidepanel[K
+⠇ [3/3] options, popup, sidepanel[K
+⠏ [3/3] options, popup, sidepanel[K
+⠋ [3/3] options, popup, sidepanel[K
+⠙ [3/3] options, popup, sidepanel[K
+⠹ [3/3] options, popup, sidepanel[K
+⠸ [3/3] options, popup, sidepanel[K
+⠼ [3/3] options, popup, sidepanel[K
+⠴ [3/3] options, popup, sidepanel[K
+⠦ [3/3] options, popup, sidepanel[K
+⠧ [3/3] options, popup, sidepanel[K
+⠇ [3/3] options, popup, sidepanel[K
+⠏ [3/3] options, popup, sidepanel[K
+⠋ [3/3] options, popup, sidepanel[K
+⠙ [3/3] options, popup, sidepanel[K
+⠹ [3/3] options, popup, sidepanel[K
+⠸ [3/3] options, popup, sidepanel[K
+⠼ [3/3] options, popup, sidepanel[K
+⠴ [3/3] options, popup, sidepanel[K
+⠦ [3/3] options, popup, sidepanel[K
+⠧ [3/3] options, popup, sidepanel[K
+⠇ [3/3] options, popup, sidepanel[K
+⠏ [3/3] options, popup, sidepanel[K
+⠋ [3/3] options, popup, sidepanel[K
+⠙ [3/3] options, popup, sidepanel[K
+⠹ [3/3] options, popup, sidepanel[K
+⠸ [3/3] options, popup, sidepanel[K
+⠼ [3/3] options, popup, sidepanel[K
+⠴ [3/3] options, popup, sidepanel[K
+⠦ [3/3] options, popup, sidepanel[K
+⠧ [3/3] options, popup, sidepanel[K
+⠇ [3/3] options, popup, sidepanel[K
+⠏ [3/3] options, popup, sidepanel[K
+⠋ [3/3] options, popup, sidepanel[K
+⠙ [3/3] options, popup, sidepanel[K
+⠹ [3/3] options, popup, sidepanel[K
+⠸ [3/3] options, popup, sidepanel[K
+⠼ [3/3] options, popup, sidepanel[K
+⠴ [3/3] options, popup, sidepanel[K
+⠦ [3/3] options, popup, sidepanel[K
+⠧ [3/3] options, popup, sidepanel[K
+⠇ [3/3] options, popup, sidepanel[K
+⠏ [3/3] options, popup, sidepanel[K
+⠋ [3/3] options, popup, sidepanel[K
+⠙ [3/3] options, popup, sidepanel[K
+⠹ [3/3] options, popup, sidepanel[K
+⠸ [3/3] options, popup, sidepanel[K
+⠼ [3/3] options, popup, sidepanel[K
+⠴ [3/3] options, popup, sidepanel[K
+⠦ [3/3] options, popup, sidepanel[K
+⠧ [3/3] options, popup, sidepanel[K
+⠇ [3/3] options, popup, sidepanel[K
+⠏ [3/3] options, popup, sidepanel[K
+⠋ [3/3] options, popup, sidepanel[K
+⠙ [3/3] options, popup, sidepanel[K
+⠹ [3/3] options, popup, sidepanel[K
+⠸ [3/3] options, popup, sidepanel[K
+⠼ [3/3] options, popup, sidepanel[K
+⠴ [3/3] options, popup, sidepanel[K
+⠦ [3/3] options, popup, sidepanel[K
+⠧ [3/3] options, popup, sidepanel[K
+⠇ [3/3] options, popup, sidepanel[K
+⠏ [3/3] options, popup, sidepanel[K
+⠋ [3/3] options, popup, sidepanel[K
+⠙ [3/3] options, popup, sidepanel[K
+⠹ [3/3] options, popup, sidepanel[K
+⠸ [3/3] options, popup, sidepanel[K
+⠼ [3/3] options, popup, sidepanel[K
+⠴ [3/3] options, popup, sidepanel[K
+⠦ [3/3] options, popup, sidepanel[K
+⠧ [3/3] options, popup, sidepanel[K
+⠇ [3/3] options, popup, sidepanel[K
+⠏ [3/3] options, popup, sidepanel[K
+⠋ [3/3] options, popup, sidepanel[K
+⠙ [3/3] options, popup, sidepanel[K
+⠹ [3/3] options, popup, sidepanel[K
+⠸ [3/3] options, popup, sidepanel[K
+⠼ [3/3] options, popup, sidepanel[K
+⠴ [3/3] options, popup, sidepanel[K
+⠦ [3/3] options, popup, sidepanel[K
+⠧ [3/3] options, popup, sidepanel[K
+⠇ [3/3] options, popup, sidepanel[K
+⠏ [3/3] options, popup, sidepanel[K
+⠋ [3/3] options, popup, sidepanel[K
+⠙ [3/3] options, popup, sidepanel[K
+⠹ [3/3] options, popup, sidepanel[K
+⠸ [3/3] options, popup, sidepanel[K
+⠼ [3/3] options, popup, sidepanel[K
+⠴ [3/3] options, popup, sidepanel[K
+⠦ [3/3] options, popup, sidepanel[K
+⠧ [3/3] options, popup, sidepanel[K
+⠇ [3/3] options, popup, sidepanel[K
+⠏ [3/3] options, popup, sidepanel[K
+⠋ [3/3] options, popup, sidepanel[K
+⠙ [3/3] options, popup, sidepanel[K
+⠹ [3/3] options, popup, sidepanel[K
+⠸ [3/3] options, popup, sidepanel[K
+⠼ [3/3] options, popup, sidepanel[K
+⠴ [3/3] options, popup, sidepanel[K
+⠦ [3/3] options, popup, sidepanel[K
+⠧ [3/3] options, popup, sidepanel[K
+⠇ [3/3] options, popup, sidepanel[K
+⠏ [3/3] options, popup, sidepanel[K
+⠋ [3/3] options, popup, sidepanel[K
+⠙ [3/3] options, popup, sidepanel[K
+⠹ [3/3] options, popup, sidepanel[K
+⠸ [3/3] options, popup, sidepanel[K
+⠼ [3/3] options, popup, sidepanel[K
+⠴ [3/3] options, popup, sidepanel[K
+[K[?25h
+[K[?25h√ Built extension in 17.8 s
+  ├─ .output\v0.1.3\chrome-mv3\manifest.json                       864 B    
+  ├─ .output\v0.1.3\chrome-mv3\options.html                        552 B    
+  ├─ .output\v0.1.3\chrome-mv3\popup.html                          496 B    
+  ├─ .output\v0.1.3\chrome-mv3\sidepanel.html                      500 B    
+  ├─ .output\v0.1.3\chrome-mv3\background.js                       156.38 kB
+  ├─ .output\v0.1.3\chrome-mv3\chunks\App-CnG-Gurx.js              390.95 kB
+  ├─ .output\v0.1.3\chrome-mv3\chunks\docx-6wjkjp7e.js             9.86 kB  
+  ├─ .output\v0.1.3\chrome-mv3\chunks\Markdown-DNeVdp6Y.js         164.32 kB
+  ├─ .output\v0.1.3\chrome-mv3\chunks\options-D2wylvT5.js          219 B    
+  ├─ .output\v0.1.3\chrome-mv3\chunks\pdf-NkrR2AUw.js              443.69 kB
+  ├─ .output\v0.1.3\chrome-mv3\chunks\popup-RuGrN_gq.js            217 B    
+  ├─ .output\v0.1.3\chrome-mv3\chunks\sidepanel-C4424z8z.js        221 B    
+  ├─ .output\v0.1.3\chrome-mv3\extract.js                          47.84 kB 
+  ├─ .output\v0.1.3\chrome-mv3\assets\App-D-liFg57.css             17.95 kB 
+  ├─ .output\v0.1.3\chrome-mv3\assets\pdf.worker.min-CIqJB0yW.mjs  1.27 MB  
+  ├─ .output\v0.1.3\chrome-mv3\icons\128.png                       2.52 kB  
+  ├─ .output\v0.1.3\chrome-mv3\icons\16.png                        409 B    
+  ├─ .output\v0.1.3\chrome-mv3\icons\32.png                        772 B    
+  ├─ .output\v0.1.3\chrome-mv3\icons\48.png                        1.19 kB  
+  ├─ .output\v0.1.3\chrome-mv3\LICENSE                             10.17 kB 
+  ├─ .output\v0.1.3\chrome-mv3\NOTICE                              244 B    
+  └─ .output\v0.1.3\chrome-mv3\THIRD_PARTY_NOTICES.txt             142.64 kB
+Σ Total size: 2.66 MB                                            
+√ Finished in 24.3 s
+
+> sage-extension@0.1.3 verify:release
+> node scripts/check-source.mjs && node scripts/package-release.mjs
+
+Source credential and machine-path pattern check passed.
+Verified 22 runtime files. ZIP SHA-256 525d4c74803620643ecb4c2ecd3885dcd20c47a431370e10845fcd963cf9633e

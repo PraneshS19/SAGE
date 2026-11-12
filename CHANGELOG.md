@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.3 — Research Reliability and Accuracy
+
+Recover limited intermediate output with scoped source excerpts, add optional persistent research checkpoints, and tighten claim-local numeric checks and citation rendering. Package separately from 0.1.2.
+
 ## 0.1.2 — Functional Alpha
 
 Added explicit local and cloud onboarding, discovered-model selection, retry and origin guidance. Added a separately staged, checksummed runtime ZIP, installation and upgrade guides, release verification commands and a local Git baseline. Historical evidence is archived. The existing unpacked path remains suitable for same-ID updates.

@@ -1,3 +1,11 @@
+# 0.1.3 Helium verification
+
+Sandboxed Windows Helium 0.21.2.1 / Chromium 157.0.8103.50 passed all 14 deterministic browser cases. The real versioned portable build completed eight workflow generations, including real model switching, a five-step long DOCX, short PDF and DOCX and multi-tab research. The isolated Ollama outage was detected and its restart recovered. Completed history survived browser relaunch. A separate controlled test verified restoring an unfinished batch checkpoint and reviewing a retry without resending the completed batch. Prior native toolbar, panel and context-menu evidence below remains historical. Native controls were not rerun for this milestone.
+
+[Live Helium evidence](evidence/reliability/helium-live.json)
+
+---
+
 # Helium compatibility — 0.1.1
 
 Verified on Windows, 2026-11-11, Helium 0.21.2.1 / Chromium 157.0.8103.50 at `<local-workspace>\AppData\Local\imput\Helium\Application\chrome.exe`.

@@ -1,0 +1,613 @@
+{
+  "testedAt": "2026-11-12T11:26:32.573Z",
+  "browser": "157.0.8103.50",
+  "productionManifestUnchanged": true,
+  "results": [
+    {
+      "name": "A normal webpage",
+      "model": "phi3:3.8b",
+      "status": "complete",
+      "output": "The pilot reported a 12% decrease in water use over six weeks using 42 volunteers but lacked a randomized control group, which is a limitation for rigorous scientific evaluation (sdb0c75bc-p1-ae815b19).",
+      "sources": [
+        {
+          "id": "sdb0c75bc",
+          "kind": "page",
+          "metadata": {
+            "domain": "127.0.0.1",
+            "extractedAt": 1794482914980,
+            "language": "en",
+            "method": "readability",
+            "warnings": [],
+            "wordCount": 22
+          },
+          "passages": [
+            {
+              "id": "sdb0c75bc-p1-ae815b19",
+              "offset": 0,
+              "text": "The pilot included 42 volunteers and reported 12% lower water use over six weeks. It did not use a randomized control group."
+            }
+          ],
+          "tabId": 1432778661,
+          "title": "Garden pilot",
+          "url": "http://127.0.0.1:54576/pilot"
+        }
+      ],
+      "elapsedMs": 6964,
+      "firstTokenMs": 5913,
+      "promptTokens": 1191,
+      "plannedSteps": 1,
+      "completedSteps": 1,
+      "recoveredSteps": 0
+    },
+    {
+      "name": "A follow-up",
+      "model": "phi3:3.8b",
+      "status": "complete",
+      "output": "No, the pilot did not use a randomized control group (sdb0c75bc-p1-ae815b19).",
+      "sources": [
+        {
+          "id": "sdb0c75bc",
+          "kind": "page",
+          "metadata": {
+            "domain": "127.0.0.1",
+            "extractedAt": 1794482914980,
+            "language": "en",
+            "method": "readability",
+            "warnings": [],
+            "wordCount": 22
+          },
+          "passages": [
+            {
+              "id": "sdb0c75bc-p1-ae815b19",
+              "offset": 0,
+              "text": "The pilot included 42 volunteers and reported 12% lower water use over six weeks. It did not use a randomized control group."
+            }
+          ],
+          "tabId": 1432778661,
+          "title": "Garden pilot",
+          "url": "http://127.0.0.1:54576/pilot"
+        }
+      ],
+      "elapsedMs": 3816,
+      "firstTokenMs": 2769,
+      "promptTokens": 1414,
+      "plannedSteps": 1,
+      "completedSteps": 1,
+      "recoveredSteps": 0
+    },
+    {
+      "name": "F model switch",
+      "model": "qwen2.5:3b",
+      "status": "complete",
+      "output": "The participant count was 42, with an uncertainty noted due to the lack of a randomized control group. [sdb0c75bc-p1-ae815b19]",
+      "sources": [
+        {
+          "id": "sdb0c75bc",
+          "kind": "page",
+          "metadata": {
+            "domain": "127.0.0.1",
+            "extractedAt": 1794482914980,
+            "language": "en",
+            "method": "readability",
+            "warnings": [],
+            "wordCount": 22
+          },
+          "passages": [
+            {
+              "id": "sdb0c75bc-p1-ae815b19",
+              "offset": 0,
+              "text": "The pilot included 42 volunteers and reported 12% lower water use over six weeks. It did not use a randomized control group."
+            }
+          ],
+          "tabId": 1432778661,
+          "title": "Garden pilot",
+          "url": "http://127.0.0.1:54576/pilot"
+        }
+      ],
+      "elapsedMs": 10432,
+      "firstTokenMs": 10140,
+      "promptTokens": 1192,
+      "plannedSteps": 1,
+      "completedSteps": 1,
+      "recoveredSteps": 0
+    },
+    {
+      "name": "C DOCX summary",
+      "model": "qwen2.5:3b",
+      "status": "complete",
+      "output": "The pilot study, involving 42 volunteers, showed a 12% reduction in water use over a six-week period, though this was not a randomized controlled trial, lacking a group that did not receive the intervention. [sbd210a91-p2-ae815b19].",
+      "sources": [
+        {
+          "id": "sbd210a91",
+          "kind": "docx",
+          "metadata": {
+            "extractedAt": 1794482944929,
+            "method": "docx-body-xml",
+            "warnings": [
+              "Only body paragraphs and basic tables were extracted. Images, footnotes, comments, tracked deletions, headers and embedded objects may be omitted. No external relationships or embedded code were opened."
+            ],
+            "wordCount": 25
+          },
+          "passages": [
+            {
+              "id": "sbd210a91-p1-2d54dff3",
+              "offset": 0,
+              "section": "Document findings",
+              "text": "# Document findings"
+            },
+            {
+              "id": "sbd210a91-p2-ae815b19",
+              "offset": 21,
+              "section": "Document findings",
+              "text": "The pilot included 42 volunteers and reported 12% lower water use over six weeks. It did not use a randomized control group."
+            }
+          ],
+          "title": "pilot.docx",
+          "url": ""
+        }
+      ],
+      "elapsedMs": 8228,
+      "firstTokenMs": 6479,
+      "promptTokens": 1230,
+      "plannedSteps": 1,
+      "completedSteps": 1,
+      "recoveredSteps": 0
+    },
+    {
+      "name": "C DOCX question",
+      "model": "qwen2.5:3b",
+      "status": "complete",
+      "output": "The pilot study included 42 volunteers. [sbd210a91-p2-ae815b19]",
+      "sources": [
+        {
+          "id": "sbd210a91",
+          "kind": "docx",
+          "metadata": {
+            "extractedAt": 1794482944929,
+            "method": "docx-body-xml",
+            "warnings": [
+              "Only body paragraphs and basic tables were extracted. Images, footnotes, comments, tracked deletions, headers and embedded objects may be omitted. No external relationships or embedded code were opened."
+            ],
+            "wordCount": 25
+          },
+          "passages": [
+            {
+              "id": "sbd210a91-p1-2d54dff3",
+              "offset": 0,
+              "section": "Document findings",
+              "text": "# Document findings"
+            },
+            {
+              "id": "sbd210a91-p2-ae815b19",
+              "offset": 21,
+              "section": "Document findings",
+              "text": "The pilot included 42 volunteers and reported 12% lower water use over six weeks. It did not use a randomized control group."
+            }
+          ],
+          "title": "pilot.docx",
+          "url": ""
+        }
+      ],
+      "elapsedMs": 9440,
+      "firstTokenMs": 8694,
+      "promptTokens": 1494,
+      "plannedSteps": 1,
+      "completedSteps": 1,
+      "recoveredSteps": 0
+    },
+    {
+      "name": "D PDF summary",
+      "model": "qwen2.5:3b",
+      "status": "complete",
+      "output": "The pilot study included 42 volunteers and reported a 12% reduction in water use over a six-week period, but it did not use a random assignment method to control for external variables. [s5ad7854b-page1-p1-fb0eed81]",
+      "sources": [
+        {
+          "id": "s5ad7854b",
+          "kind": "pdf",
+          "passages": [
+            {
+              "id": "s5ad7854b-page1-p1-fb0eed81",
+              "offset": 0,
+              "page": 1,
+              "text": "The pilot included 42 volunteers and reported 12% lower water use over six weeks. It did not use a random"
+            }
+          ],
+          "title": "pilot.pdf",
+          "url": ""
+        }
+      ],
+      "elapsedMs": 6230,
+      "firstTokenMs": 4795,
+      "promptTokens": 1172,
+      "plannedSteps": 1,
+      "completedSteps": 1,
+      "recoveredSteps": 0
+    },
+    {
+      "name": "Long DOCX",
+      "model": "qwen2.5:3b",
+      "status": "complete",
+      "output": "Based on the provided exact numerical evidence, the summaries can be summarized as follows:\n\n- **Step 3 Summary**:\n  - **Minimum Reading**: 31 (From passage s7b063111-p1-ec278a7)\n  - **Maximum Reading**: 39 (From passage s7b063111-p9-c370e2a7)\n  - **Limitation**: Observational readings do not establish a causal relationship (From passages s7b3111-p12-77d63fb5, s7b063111-p13-240f96db, s7b063111-p14-6af3f649, s7b063111-p15-665c6553, s7b063111-p16-7839bcbd, s7b063111-p17-1a493dfb, s7b063111-p18-f1545719).\n\n- **Step 2 Summary**:\n  - **Minimum Reading**: 53 (From passage ss7b063111-p23-537a0867)\n  - **Maximum Reading**: 54 (From passage ss7b063111-p24-ee7a8aad)\n  - **Limitation**: The readings are observational and do not establish a causal relationship.\n\nThe minimum and maximum readings are provided from specific passages, and the limitation is consistently stated across multiple passages. The exact numerical values and the context in which these observations are made are noted without inference or calculation of full numerical ranges from compressed notes.",
+      "sources": [
+        {
+          "id": "s7b063111",
+          "kind": "docx",
+          "metadata": {
+            "extractedAt": 1794482986962,
+            "method": "docx-body-xml",
+            "warnings": [
+              "Only body paragraphs and basic tables were extracted. Images, footnotes, comments, tracked deletions, headers and embedded objects may be omitted. No external relationships or embedded code were opened."
+            ],
+            "wordCount": 2328
+          },
+          "passages": [
+            {
+              "id": "s7b063111-p1-ec278a7",
+              "offset": 0,
+              "text": "Section 1. The station logged 31 readings. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship."
+            },
+            {
+              "id": "s7b063111-p2-c38d5099",
+              "offset": 744,
+              "text": "Section 2. The station logged 32 readings. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship."
+            },
+            {
+              "id": "s7b063111-p3-378a057",
+              "offset": 1488,
+              "text": "Section 3. The station logged 33 readings. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship."
+            },
+            {
+              "id": "s7b063111-p4-72d96e25",
+              "offset": 2232,
+              "text": "Section 4. The station logged 34 readings. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship."
+            },
+            {
+              "id": "s7b063111-p5-2f7fe237",
+              "offset": 2976,
+              "text": "Section 5. The station logged 35 readings. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship."
+            },
+            {
+              "id": "s7b063111-p6-4f3093a1",
+              "offset": 3720,
+              "text": "Section 6. The station logged 36 readings. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship."
+            },
+            {
+              "id": "s7b063111-p7-819d8017",
+              "offset": 4464,
+              "text": "Section 7. The station logged 37 readings. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship."
+            },
+            {
+              "id": "s7b063111-p8-69cbda75",
+              "offset": 5208,
+              "text": "Section 8. The station logged 38 readings. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship."
+            },
+            {
+              "id": "s7b063111-p9-c370e2a7",
+              "offset": 5952,
+              "text": "Section 9. The station logged 39 readings. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship."
+            },
+            {
+              "id": "s7b063111-p10-e4aa06b9",
+              "offset": 6696,
+              "text": "Section 10. The station logged 40 readings. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship."
+            },
+            {
+              "id": "s7b063111-p11-63506853",
+              "offset": 7441,
+              "text": "Section 11. The station logged 41 readings. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship."
+            },
+            {
+              "id": "s7b063111-p12-77d63fb5",
+              "offset": 8186,
+              "text": "Section 12. The station logged 42 readings. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship."
+            },
+            {
+              "id": "s7b063111-p13-240f96db",
+              "offset": 8931,
+              "text": "Section 13. The station logged 43 readings. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship."
+            },
+            {
+              "id": "s7b063111-p14-6af3f649",
+              "offset": 9676,
+              "text": "Section 14. The station logged 44 readings. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship."
+            },
+            {
+              "id": "s7b063111-p15-665c6553",
+              "offset": 10421,
+              "text": "Section 15. The station logged 45 readings. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship."
+            },
+            {
+              "id": "s7b063111-p16-7839bcbd",
+              "offset": 11166,
+              "text": "Section 16. The station logged 46 readings. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship."
+            },
+            {
+              "id": "s7b063111-p17-1a493dfb",
+              "offset": 11911,
+              "text": "Section 17. The station logged 47 readings. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship."
+            },
+            {
+              "id": "s7b063111-p18-f1545719",
+              "offset": 12656,
+              "text": "Section 18. The station logged 48 readings. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship."
+            },
+            {
+              "id": "s7b063111-p19-10eeb543",
+              "offset": 13401,
+              "text": "Section 19. The station logged 49 readings. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship."
+            },
+            {
+              "id": "s7b063111-p20-1bd9454d",
+              "offset": 14146,
+              "text": "Section 20. The station logged 50 readings. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship."
+            },
+            {
+              "id": "s7b063111-p21-25826b7",
+              "offset": 14891,
+              "text": "Section 21. The station logged 51 readings. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship."
+            },
+            {
+              "id": "s7b063111-p22-4d1e9591",
+              "offset": 15636,
+              "text": "Section 22. The station logged 52 readings. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship."
+            },
+            {
+              "id": "s7b063111-p23-537a0867",
+              "offset": 16381,
+              "text": "Section 23. The station logged 53 readings. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship."
+            },
+            {
+              "id": "s7b063111-p24-ee7a8aad",
+              "offset": 17126,
+              "text": "Section 24. The station logged 54 readings. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship. The readings were observational and establish no causal relationship."
+            }
+          ],
+          "title": "long-stations.docx",
+          "url": ""
+        }
+      ],
+      "elapsedMs": 27041,
+      "firstTokenMs": 22969,
+      "promptTokens": 4080,
+      "plannedSteps": 5,
+      "completedSteps": 5,
+      "recoveredSteps": 1
+    },
+    {
+      "name": "E multi-tab comparison",
+      "model": "qwen2.5:3b",
+      "status": "complete",
+      "output": "The Garden pilot study included 42 volunteers and showed a 12% reduction in water use over six weeks without a randomized control group, indicating a design limitation. In contrast, the Garden replication study conducted a randomized twelve-week trial involving 210 gardens, reporting a 2% reduction in water use, but the 95% confidence interval suggesting a range from a 3% increase to a 7% decrease indicates inconclusive evidence of a beneficial effect. These studies differ in their design and results, with the pilot having a different control setup and the replication having wider and ambiguous outcomes.",
+      "sources": [
+        {
+          "id": "sdb0c75bc",
+          "kind": "page",
+          "metadata": {
+            "domain": "127.0.0.1",
+            "extractedAt": 1794483033595,
+            "language": "en",
+            "method": "readability",
+            "warnings": [],
+            "wordCount": 22
+          },
+          "passages": [
+            {
+              "id": "sdb0c75bc-p1-ae815b19",
+              "offset": 0,
+              "text": "The pilot included 42 volunteers and reported 12% lower water use over six weeks. It did not use a randomized control group."
+            }
+          ],
+          "tabId": 1432778661,
+          "title": "Garden pilot",
+          "url": "http://127.0.0.1:54576/pilot"
+        },
+        {
+          "id": "s345c2571",
+          "kind": "page",
+          "metadata": {
+            "domain": "127.0.0.1",
+            "extractedAt": 1794483033746,
+            "language": "en",
+            "method": "readability",
+            "warnings": [],
+            "wordCount": 31
+          },
+          "passages": [
+            {
+              "id": "s345c2571-p1-fccf8f4c",
+              "offset": 0,
+              "text": "A randomized twelve-week trial with 210 gardens estimated a 2% reduction. Its 95% confidence interval ranged from a 3% increase to a 7% reduction. This did not establish a clear benefit."
+            }
+          ],
+          "tabId": 1432778662,
+          "title": "Garden replication",
+          "url": "http://127.0.0.1:54576/replication"
+        }
+      ],
+      "elapsedMs": 5812,
+      "firstTokenMs": 3281,
+      "promptTokens": 1326,
+      "plannedSteps": 1,
+      "completedSteps": 1,
+      "recoveredSteps": 0
+    }
+  ],
+  "extensionRequests": [
+    {
+      "url": "http://127.0.0.1:11435/api/tags",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:11435/api/tags",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:11435/api/chat",
+      "method": "POST",
+      "model": "phi3:3.8b"
+    },
+    {
+      "url": "http://127.0.0.1:11435/api/tags",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:11435/api/chat",
+      "method": "POST",
+      "model": "phi3:3.8b"
+    },
+    {
+      "url": "http://127.0.0.1:11435/api/tags",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:11435/api/tags",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:11435/api/chat",
+      "method": "POST",
+      "model": "phi3:3.8b"
+    },
+    {
+      "url": "http://127.0.0.1:11435/api/chat",
+      "method": "POST",
+      "model": "phi3:3.8b"
+    },
+    {
+      "url": "http://127.0.0.1:11435/api/tags",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:11435/api/ps",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:11435/api/tags",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:11435/api/chat",
+      "method": "POST",
+      "model": "qwen2.5:3b"
+    },
+    {
+      "url": "http://127.0.0.1:11435/api/chat",
+      "method": "POST",
+      "model": "qwen2.5:3b"
+    },
+    {
+      "url": "http://127.0.0.1:11435/api/chat",
+      "method": "POST",
+      "model": "qwen2.5:3b"
+    },
+    {
+      "url": "http://127.0.0.1:11435/api/chat",
+      "method": "POST",
+      "model": "qwen2.5:3b"
+    },
+    {
+      "url": "http://127.0.0.1:11435/api/chat",
+      "method": "POST",
+      "model": "qwen2.5:3b"
+    },
+    {
+      "url": "http://127.0.0.1:11435/api/chat",
+      "method": "POST",
+      "model": "qwen2.5:3b"
+    },
+    {
+      "url": "http://127.0.0.1:11435/api/chat",
+      "method": "POST",
+      "model": "qwen2.5:3b"
+    },
+    {
+      "url": "http://127.0.0.1:11435/api/chat",
+      "method": "POST",
+      "model": "qwen2.5:3b"
+    },
+    {
+      "url": "http://127.0.0.1:11435/api/chat",
+      "method": "POST",
+      "model": "qwen2.5:3b"
+    },
+    {
+      "url": "http://127.0.0.1:11435/api/chat",
+      "method": "POST",
+      "model": "qwen2.5:3b"
+    }
+  ],
+  "pageRequests": 2,
+  "origin": "chrome-extension://<test-extension-id>",
+  "onboardingSelection": true,
+  "models": [
+    "qwen2.5:3b",
+    "phi3:3.8b"
+  ],
+  "preloadMs": 5639,
+  "diagnostics": {
+    "ok": true,
+    "provider": "ollama",
+    "model": "phi3:3.8b",
+    "endpoint": "http://127.0.0.1:11435",
+    "connectionStatus": "Connected (HTTP 200 OK)",
+    "corsStatus": "Accepted (HTTP 200 OK)",
+    "modelStatus": "Installed and ready (phi3:3.8b)",
+    "inferenceStatus": "Passed (streaming response verified)",
+    "models": [
+      "qwen2.5:3b",
+      "phi3:3.8b"
+    ],
+    "steps": [
+      {
+        "name": "Server Reachability",
+        "status": "pass",
+        "message": "Connected to http://127.0.0.1:11435 (ollama)"
+      },
+      {
+        "name": "Browser Origin Acceptance",
+        "status": "pass",
+        "message": "Origin accepted by server (HTTP 200 OK)"
+      },
+      {
+        "name": "Available Models",
+        "status": "pass",
+        "message": "2 model(s) available: qwen2.5:3b, phi3:3.8b"
+      },
+      {
+        "name": "Selected Model",
+        "status": "pass",
+        "message": "Model 'phi3:3.8b' is available on the server"
+      },
+      {
+        "name": "Inference Test",
+        "status": "pass",
+        "message": "Minimal test prompt completed successfully"
+      },
+      {
+        "name": "Streaming Support",
+        "status": "pass",
+        "message": "Streaming verified (received tokens: \"OK\")"
+      }
+    ],
+    "summary": "All 6 checks passed! Connected to Ollama with model 'phi3:3.8b' and verified local streaming inference."
+  },
+  "ollamaRestart": {
+    "unavailable": "Unreachable / Server down",
+    "recovered": "Connected (HTTP 200)",
+    "elapsedMs": 18325
+  },
+  "popupClosure": true,
+  "cloudCancelledBeforeDispatch": true,
+  "storageBytes": {
+    "local": 44842,
+    "session": 4061
+  },
+  "uiHeap": {
+    "usedSize": 15534384,
+    "totalSize": 24883200,
+    "embedderHeapUsedSize": 3976016,
+    "backingStorageSize": 1028193
+  },
+  "nonlocalExtensionRequests": [],
+  "browserRestartHistory": true
+}

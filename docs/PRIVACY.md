@@ -1,3 +1,9 @@
+# Optional 0.1.3 restart recovery
+
+Batch checkpoint storage is off by default, independently of saved history. Enabling it keeps the latest unfinished batch job in local extension storage, including the reviewed source text, draft and completed notes. The snapshot omits the provider key and is limited to 1.5 MB. It is removed when completed, disabled, explicitly cleared or found expired on restart after 24 hours. The extension can restore the checkpoint without contacting a provider. You review and confirm any retry. Browser local storage is not an encrypted vault.
+
+---
+
 # SAGE privacy notice
 
 SAGE has no hosted service, accounts, analytics, advertising or tracking. This notice describes the release extension, not normal website traffic or WXT’s development server.

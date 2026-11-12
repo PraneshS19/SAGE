@@ -13,7 +13,14 @@ import {
   type Provider,
   type Settings,
 } from "../lib/schema";
-import { getSettings, history, saveHistory } from "../lib/storage";
+import {
+  getSettings,
+  history,
+  saveHistory,
+  clearResearchCheckpoint,
+  loadResearchCheckpoint,
+  saveResearchCheckpoint,
+} from "../lib/storage";
 import { assertPage, endpointInfo, trustedSender } from "../lib/security";
 import { hash, passages, canonical } from "../lib/context";
 import { prepareResearch, executePlan } from "../lib/processing";
@@ -38,12 +45,19 @@ export default defineBackground(() => {
     await chrome.storage.session.setAccessLevel({
       accessLevel: "TRUSTED_CONTEXTS",
     });
-    const { job } = (await chrome.storage.session.get("job")) as { job?: Job };
-    if (job?.status === "running") {
+    const { job: sessionJob } = (await chrome.storage.session.get("job")) as {
+      job?: Job;
+    };
+    const job =
+      sessionJob ?? (await loadResearchCheckpoint().catch(() => undefined));
+    if (job && (job.status === "running" || !sessionJob)) {
       job.status = "interrupted";
       job.error =
         "The browser stopped the background worker. Partial output is preserved. Review and regenerate to retry.";
-      await chrome.storage.session.set({ job });
+      await chrome.storage.session.set({
+        job,
+        ...(!sessionJob ? { sources: job.draft.sources } : {}),
+      });
     }
   })();
   const menus = {
@@ -145,6 +159,10 @@ export default defineBackground(() => {
       effectiveCapabilities(provider).timeoutMs,
     );
     let flushed = 0;
+    const checkpoint = () =>
+      saveResearchCheckpoint(job).catch(() => {
+        /* Session checkpoint remains available. */
+      });
     try {
       const onToken = async (token: string) => {
         job.output += token;
@@ -172,7 +190,9 @@ export default defineBackground(() => {
               stage: step.kind,
             };
             job.summaries = [...summaries];
+            job.updated = Date.now();
             await chrome.storage.session.set({ job });
+            await checkpoint();
           },
           onToken,
         );
@@ -223,13 +243,14 @@ export default defineBackground(() => {
       await chrome.storage.session.set({ job });
       if (job.status === "complete") {
         try {
+          await clearResearchCheckpoint();
           await saveHistory(job);
         } catch {
           job.error =
             "Answer completed, but local history could not be saved. Export the answer or clear old data.";
           await chrome.storage.session.set({ job });
         }
-      }
+      } else await checkpoint();
     }
   }
   async function handle(message: Request): Promise<unknown> {
@@ -272,6 +293,14 @@ export default defineBackground(() => {
       case "settings": {
         if (busy)
           throw new Error("Wait for the current provider operation to finish.");
+        if (
+          controllers.size &&
+          !!settings.persistCheckpoints !==
+            !!message.settings.persistCheckpoints
+        )
+          throw new Error(
+            "Stop generation before changing checkpoint retention.",
+          );
         endpointInfo(message.settings.provider.endpoint);
         busy = true;
         try {
@@ -308,6 +337,8 @@ export default defineBackground(() => {
             },
           });
           await chrome.storage.session.remove("draft");
+          if (!message.settings.persistCheckpoints)
+            await clearResearchCheckpoint();
           return true;
         } finally {
           busy = false;
@@ -611,6 +642,7 @@ export default defineBackground(() => {
             throw new Error("Provider changed. Review a new preview.");
           for (const source of draft.sources) await sourcePolicy(source, true);
           await providerPermission(settings.provider.endpoint);
+          if (!draft.resume?.length) await clearResearchCheckpoint();
           const job: Job = {
             id: crypto.randomUUID(),
             status: "running",
@@ -667,6 +699,7 @@ export default defineBackground(() => {
           throw new Error(
             "Stop generation before starting a new conversation.",
           );
+        await clearResearchCheckpoint();
         await chrome.storage.session.clear();
         return true;
       case "navigate": {

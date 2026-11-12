@@ -8,7 +8,7 @@ if (!process.env.SAGE_BROWSER)
   );
 await mkdir("test-results", { recursive: true });
 const profile = await mkdtemp(path.resolve("test-results/helium-real-"));
-const output = path.resolve(".output/chrome-mv3");
+const output = path.resolve(".output/v0.1.3/chrome-mv3");
 const context = await chromium.launchPersistentContext(profile, {
   executablePath: process.env.SAGE_BROWSER,
   channel: "chromium",

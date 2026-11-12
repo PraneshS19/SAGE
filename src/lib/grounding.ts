@@ -8,7 +8,7 @@ export interface EvidenceRecord {
 const values = (text: string) =>
   [
     ...text.matchAll(
-      /(?<![\w])[-+]?\d+(?:[,.]\d+)*(?:\s*%|\s*(?:kg|km|cm|mm|mg|ms|years?|days?|hours?|participants|observations))?/gi,
+      /(?<![\w])[-+]?\d+(?:[,.]\d+)*(?:\s*%|\s*(?:kg|km|cm|mm|mg|ms|years?|days?|hours?|participants|observations)\b)?/gi,
     ),
   ].map((m) => m[0].trim());
 // Exact source excerpts, never model-produced facts. Repeated identical excerpts
@@ -29,31 +29,35 @@ export function numericalEvidence(sources: Source[]): EvidenceRecord[] {
 }
 export function auditGrounding(answer: string, sources: Source[]) {
   const refs = references(answer, sources);
-  const evidence = refs.flatMap((r) => (r.passage ? [r.passage.text] : []));
-  const withoutIds = answer.replace(/\[[^\]\n]+\](?:\([^)]*\))?/g, "");
-  const sourceNumbers = new Set(
-    evidence.flatMap((t) =>
-      values(t).map((v) => v.toLowerCase().replace(/\s+/g, " ")),
-    ),
-  );
-  const missingValues = [
-    ...new Set(
-      values(withoutIds).filter(
-        (v) => !sourceNumbers.has(v.toLowerCase().replace(/\s+/g, " ")),
-      ),
-    ),
-  ];
-  const quotes = [...withoutIds.matchAll(/[“"]([^”"\n]+)[”"]/g)].map((m) => ({
-    quote: m[1]!,
-    found: evidence.some((p) => p.includes(m[1]!)),
-  }));
+  const normalize = (v: string) => v.toLowerCase().replace(/\s+/g, " ");
+  const missing = new Set<string>();
+  const quotes: { quote: string; found: boolean }[] = [];
+  // Keep reference scope local to the claim. Decimal points and quoted sentence
+  // boundaries are preserved. Unparseable relationships remain unverified.
+  const claims = answer.split(/\n+|(?<!["”])[.!?] +(?=[A-Z])/);
+  for (const claim of claims) {
+    const evidence = references(claim, sources).flatMap((r) =>
+      r.passage ? [r.passage.text] : [],
+    );
+    const text = claim.replace(/\[[^\]\n]+\](?:\([^)]*\))?/g, "");
+    const sourceNumbers = new Set(
+      evidence.flatMap((t) => values(t).map(normalize)),
+    );
+    for (const value of values(text))
+      if (!sourceNumbers.has(normalize(value))) missing.add(value);
+    for (const match of text.matchAll(/[“"]([^”"\n]+)[”"]/g)) {
+      const quote = match[1]!;
+      quotes.push({ quote, found: evidence.some((p) => p.includes(quote)) });
+    }
+  }
+  const missingValues = [...missing];
   return {
     status: "Unable to verify" as const,
     missingValues,
     quotes,
     invalidReferences: refs.filter((r) => !r.passage).map((r) => r.id),
     explanation:
-      "This is a literal evidence check, not semantic verification. A value appearing somewhere in cited text does not prove the claim, range, unit relationship or calculation. Missing values require source review; derived calculations are not validated.",
+      "This is a literal evidence check, not semantic verification. A value appearing in a passage cited in the same claim does not prove the claim, range, unit relationship or calculation. Missing values require source review; derived calculations are not validated.",
   };
 }
 

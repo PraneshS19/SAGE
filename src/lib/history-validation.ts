@@ -66,6 +66,7 @@ const jobSchema = z
           stepId: z.number().int().nonnegative(),
           text: z.string(),
           passageIds: z.array(z.string()),
+          recovered: z.enum(["size", "length"]).optional(),
         }),
       )
       .max(1000)
@@ -86,6 +87,7 @@ const jobSchema = z
             inputTokenUpperBound: z.number(),
             outputTokenUpperBound: z.number(),
             summaryByteLimit: z.number(),
+            excerptRecovery: z.boolean().optional(),
           })
           .optional(),
       })

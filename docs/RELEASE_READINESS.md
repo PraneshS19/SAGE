@@ -1,3 +1,9 @@
+# 0.1.3 release decision
+
+**Functional Alpha. Public beta gates remain open.** Adaptive planning and controlled recovery pass the deterministic checks. Both installed models processed every long source batch, but Phi-3 stopped during one final synthesis and Qwen reported incorrect extrema. Live Helium verified the packaged extension, including a long DOCX workflow, but its output did not establish the requested full range. Live paid cloud inference and GPT-OSS 120B remain unverified. See [quality results](MODEL_EVALUATION.md) and [0.1.3 verification](RELEASE_VERIFICATION.md).
+
+---
+
 > Current distribution: Functional Alpha 0.1.2. The 0.1.1 architecture assessment below records the prior milestone. See [portable release verification](RELEASE_VERIFICATION.md) for current installation evidence.
 
 # Release readiness for the v0.2 milestone

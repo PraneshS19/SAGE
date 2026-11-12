@@ -775,6 +775,7 @@ export function App({
                   </small>
                   <Suspense fallback={<p>Rendering response…</p>}>
                     <Markdown
+                      sourceLinks={false}
                       text={
                         citationDisplay(job.output, job.draft.sources) ||
                         (running
@@ -806,7 +807,7 @@ export function App({
                       }{" "}
                       source batches processed.{" "}
                       {job.status === "complete"
-                        ? "Synthesis finished; notes remain lossy."
+                        ? "Synthesis finished. Processing coverage does not establish claim support."
                         : "Analysis is partial until all batches and synthesis finish."}
                     </p>
                   )}
@@ -834,6 +835,14 @@ export function App({
                       </summary>
                       {job.summaries.map((s) => (
                         <div key={s.stepId}>
+                          {s.recovered && (
+                            <p className="notice">
+                              Used bounded source excerpts because the model
+                              notes exceeded their{" "}
+                              {s.recovered === "size" ? "byte" : "token"} limit.
+                              Excerpts are selective.
+                            </p>
+                          )}
                           <h3>Step {s.stepId + 1}</h3>
                           <pre className="wrap">{s.text}</pre>
                           <small>

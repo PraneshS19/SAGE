@@ -12,6 +12,7 @@ import type { Request, State } from "../../src/lib/schema";
 import { corpusPage } from "../fixtures/corpus";
 import { zipSync, strToU8 } from "fflate";
 let context: BrowserContext;
+let launchBrowser: () => Promise<BrowserContext>;
 let extension: string;
 let server: Server;
 let base: string;
@@ -131,7 +132,9 @@ test.beforeAll(async () => {
   base = `http://127.0.0.1:${addr.port}`;
   const output = path.resolve("test-results/extension-fixture");
   await mkdir(output, { recursive: true });
-  await cp(path.resolve(".output/chrome-mv3"), output, { recursive: true });
+  await cp(path.resolve(".output/v0.1.3/chrome-mv3"), output, {
+    recursive: true,
+  });
   const manifest = JSON.parse(
     await readFile(path.join(output, "manifest.json"), "utf8"),
   );
@@ -141,9 +144,9 @@ test.beforeAll(async () => {
   manifest.host_permissions = ["http://127.0.0.1/*", "http://localhost/*"];
   manifest.permissions.push("tabs");
   await writeFile(path.join(output, "manifest.json"), JSON.stringify(manifest));
-  context = await chromium.launchPersistentContext(
-    await mkdtemp(path.resolve("test-results/browser-profile-")),
-    {
+  const profile = await mkdtemp(path.resolve("test-results/browser-profile-"));
+  launchBrowser = async () => {
+    const nextContext = await chromium.launchPersistentContext(profile, {
       channel: "chromium",
       executablePath: process.env.SAGE_BROWSER,
       chromiumSandbox: true,
@@ -152,15 +155,17 @@ test.beforeAll(async () => {
         `--disable-extensions-except=${output}`,
         `--load-extension=${output}`,
       ],
-    },
-  );
-  context.on("request", (request) => {
-    if (
-      /^https?:/.test(request.url()) &&
-      !["127.0.0.1", "localhost"].includes(new URL(request.url()).hostname)
-    )
-      nonLocalRequests.push(request.url());
-  });
+    });
+    nextContext.on("request", (request) => {
+      if (
+        /^https?:/.test(request.url()) &&
+        !["127.0.0.1", "localhost"].includes(new URL(request.url()).hostname)
+      )
+        nonLocalRequests.push(request.url());
+    });
+    return nextContext;
+  };
+  context = await launchBrowser();
   const worker =
     context.serviceWorkers()[0] ??
     (await context.waitForEvent("serviceworker"));
@@ -181,7 +186,7 @@ test.beforeAll(async () => {
   ).toBeVisible();
   await mkdir("docs", { recursive: true });
   await writeFile(
-    "docs/performance-sample.json",
+    "test-results/reliability-performance-sample.json",
     JSON.stringify(
       {
         browser: context.browser()?.version(),
@@ -315,7 +320,7 @@ test("selected sources extract, preview before send, stream and survive popup cl
   await mkdir("docs/screenshots", { recursive: true });
   await ui.setViewportSize({ width: 430, height: 980 });
   await ui.screenshot({
-    path: "docs/screenshots/popup-fixture.png",
+    path: "test-results/reliability-screenshots/popup-fixture.png",
     fullPage: true,
   });
   await ui.goto(extension + "/sidepanel.html");
@@ -324,7 +329,7 @@ test("selected sources extract, preview before send, stream and survive popup cl
     "The small sample limits generalization.",
   );
   await ui.screenshot({
-    path: "docs/screenshots/workspace-fixture.png",
+    path: "test-results/reliability-screenshots/workspace-fixture.png",
     fullPage: true,
   });
 });
@@ -428,6 +433,7 @@ test("history is opt-in, restoration works and cancellation preserves partial ou
     saved.output,
   );
   d = await rpc<{ id: string }>(ui, request);
+  holdAtSend = sends + 1;
   const jobId = await rpc<string>(ui, { type: "start", draftId: d.id });
   await expect
     .poll(
@@ -572,7 +578,7 @@ test("workspace fallback, dark theme and corrupted-settings recovery", async () 
   await ui.getByRole("button", { name: "Toggle theme" }).click();
   await expect(ui.locator("html")).toHaveAttribute("data-theme", "dark");
   await ui.screenshot({
-    path: "docs/screenshots/popup-dark-fixture.png",
+    path: "test-results/reliability-screenshots/popup-dark-fixture.png",
     fullPage: true,
   });
   await ui.evaluate(async () => {
@@ -648,6 +654,10 @@ test("long-document processing requires plan consent, excludes passages and pres
 
 test("failed long jobs require fresh retry consent and skip completed batches", async () => {
   const state = await rpc<State>(ui, { type: "state" });
+  await rpc(ui, {
+    type: "settings",
+    settings: { ...state.settings, persistCheckpoints: true },
+  });
   const draft = await rpc<import("../../src/lib/schema").Draft>(ui, {
     type: "prepare",
     sourceIds: state.sources.map((s) => s.id),
@@ -663,6 +673,24 @@ test("failed long jobs require fresh retry consent and skip completed batches", 
     .toBe("error");
   const failed = (await rpc<State>(ui, { type: "state" })).job!;
   expect(failed.summaries).toHaveLength(1);
+  await expect
+    .poll(async () =>
+      ui.evaluate(
+        async () =>
+          !!(await chrome.storage.local.get("researchCheckpoint"))
+            .researchCheckpoint,
+      ),
+    )
+    .toBe(true);
+  await context.close();
+  context = await launchBrowser();
+  ui = await context.newPage();
+  await ui.goto(extension + "/sidepanel.html");
+  const reopened = await rpc<State>(ui, { type: "state" });
+  expect(reopened.job?.status).toBe("interrupted");
+  expect(reopened.job?.summaries).toEqual(failed.summaries);
+  expect(sends).toBe(before + 2);
+
   await ui
     .getByRole("button", { name: "Review retry from failed step" })
     .click();

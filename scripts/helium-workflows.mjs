@@ -1,3 +1,4 @@
+import { once } from "node:events";
 import { spawn } from "node:child_process";
 /* global chrome, URL, Buffer, process, setTimeout */
 import { chromium, expect } from "@playwright/test";
@@ -12,7 +13,7 @@ if (!process.env.SAGE_BROWSER)
 await mkdir("test-results", { recursive: true });
 const profile = await mkdtemp(path.resolve("test-results/helium-acceptance-"));
 const output = path.resolve(
-  process.env.SAGE_EXTENSION_DIR || ".output/chrome-mv3",
+  process.env.SAGE_EXTENSION_DIR || ".output/v0.1.3/chrome-mv3",
 );
 const launch = {
   executablePath: process.env.SAGE_BROWSER,
@@ -77,7 +78,7 @@ try {
   const endpoint = process.env.SAGE_OLLAMA_EXE
     ? "http://127.0.0.1:11435"
     : "http://127.0.0.1:11434";
-  if (process.env.SAGE_OLLAMA_EXE) {
+  async function startTemporaryOllama() {
     const address = endpoint.replace("http://", "");
     const preexisting = await fetch(endpoint + "/api/version", {
       signal: AbortSignal.timeout(1000),
@@ -103,6 +104,7 @@ try {
       await new Promise((resolve) => setTimeout(resolve, 300));
     }
   }
+  if (process.env.SAGE_OLLAMA_EXE) await startTemporaryOllama();
   page = await context.newPage();
   await page.goto(origin + "/options.html");
   await page.getByRole("button", { name: "Get Started", exact: true }).click();
@@ -156,6 +158,27 @@ try {
   await rpc({ type: "preloadModel", model: "phi3:3.8b" });
   evidence.preloadMs = Date.now() - loading;
   evidence.diagnostics = await rpc({ type: "testConnection", inference: true });
+  if (temporaryOllama && process.env.SAGE_TEST_SERVER_RESTART === "1") {
+    const started = Date.now();
+    const exited = once(temporaryOllama, "exit", {
+      signal: AbortSignal.timeout(10000),
+    });
+    temporaryOllama.kill();
+    await exited;
+    const unavailable = await rpc({ type: "testConnection", inference: false });
+    expect(unavailable.ok).toBe(false);
+    expect(unavailable.connectionStatus).toContain("Unreachable");
+    await startTemporaryOllama();
+    const recovered = await rpc({ type: "testConnection", inference: false });
+    expect(recovered.ok).toBe(true);
+    expect(recovered.models).toContain("phi3:3.8b");
+    evidence.ollamaRestart = {
+      unavailable: unavailable.connectionStatus,
+      recovered: recovered.connectionStatus,
+      elapsedMs: Date.now() - started,
+    };
+    await flush();
+  }
   const a = await context.newPage();
   await a.goto(base + "/pilot");
   await page.goto(origin + "/sidepanel.html");
@@ -194,7 +217,11 @@ try {
       .poll(
         async () => {
           const j = (await rpc({ type: "state" })).job;
-          if (j?.output && firstTokenMs === undefined)
+          if (
+            j?.draft.id === preview.id &&
+            j.output &&
+            firstTokenMs === undefined
+          )
             firstTokenMs = Date.now() - started;
           return j?.draft.id === preview.id ? j.status : "running";
         },
@@ -212,6 +239,11 @@ try {
       elapsedMs: Date.now() - started,
       firstTokenMs,
       promptTokens: preview.tokens,
+      plannedSteps: preview.plan?.steps.length ?? 1,
+      completedSteps:
+        job.summaries?.length ?? (job.status === "complete" ? 1 : 0),
+      recoveredSteps:
+        job.summaries?.filter((note) => note.recovered).length ?? 0,
     });
     await flush();
     return job;
@@ -300,6 +332,31 @@ try {
     "D PDF summary",
     "Summarize the pilot in one sentence and cite the passage.",
   );
+  if (process.env.SAGE_LONG_HELIUM === "1") {
+    const text = Array.from(
+      { length: 24 },
+      (_, i) =>
+        `<w:p><w:r><w:t>Section ${i + 1}. The station logged ${31 + i} readings. ${"The readings were observational and establish no causal relationship. ".repeat(10)}</w:t></w:r></w:p>`,
+    ).join("");
+    const bundle = zipSync({
+      "word/document.xml": strToU8(
+        `<w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"><w:body>${text}</w:body></w:document>`,
+      ),
+    });
+    await page.locator('input[type=file][accept*=".docx"]').setInputFiles({
+      name: "long-stations.docx",
+      mimeType:
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      buffer: Buffer.from(bundle),
+    });
+    await expect
+      .poll(async () => (await rpc({ type: "state" })).sources[0]?.title)
+      .toContain("long-stations");
+    await infer(
+      "Long DOCX",
+      "Summarize the stations and limitations. Report the minimum and maximum readings only if supported by the selected evidence. Cite exact passage IDs.",
+    );
+  }
   const b = await context.newPage();
   await b.goto(base + "/replication");
   await page.goto(origin + "/sidepanel.html");

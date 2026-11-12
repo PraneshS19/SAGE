@@ -1,9 +1,9 @@
 # Install SAGE
 
-SAGE 0.1.2 is a Functional Alpha. You need a Chromium browser that allows unpacked Manifest V3 extensions and an AI provider. The extension runs from its own files. End users need no build tools or development server.
+SAGE 0.1.3 is a Functional Alpha. You need a Chromium browser that allows unpacked Manifest V3 extensions and an AI provider. The extension runs from its own files. End users need no build tools or development server.
 
-1. Obtain `sage-extension.zip` and `SHA256SUMS.txt` from the same trusted distribution. Compare the archive checksum with the published value if verifying the download. On Windows use `Get-FileHash .\sage-extension.zip -Algorithm SHA256`. On macOS use `shasum -a 256 sage-extension.zip`. On Linux use `sha256sum sage-extension.zip`.
-2. Extract the ZIP to a permanent folder. If you received the full `SAGE-Release` directory, you can use its `sage-extension` folder directly. Select the folder that contains `manifest.json` at its root.
+1. Obtain `sage-extension-0.1.3.zip` and `SHA256SUMS.txt` from the same trusted distribution. Compare the archive checksum with the published value if verifying the download. On Windows use `Get-FileHash .\sage-extension-0.1.3.zip -Algorithm SHA256`. On macOS use `shasum -a 256 sage-extension-0.1.3.zip`. On Linux use `sha256sum sage-extension-0.1.3.zip`.
+2. Extract the ZIP to a permanent folder. If you received the full `SAGE-0.1.3` directory, you can use its `sage-extension` folder directly. Select the folder that contains `manifest.json` at its root.
 3. In Helium or Chrome open `chrome://extensions`. In Edge open `edge://extensions`. In Brave open `brave://extensions`. Enable **Developer mode**, choose **Load unpacked**, and select the folder. This is a developer-mode installation, with no store installer or automatic updates. A managed browser can prevent unpacked installs.
 4. Open SAGE from the Extensions menu and optionally pin it. In Settings choose **Get Started**, then **Set up Local AI** or **Set up Cloud AI**. Follow [Quick Start](QUICK_START.md).
 

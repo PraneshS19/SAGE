@@ -41,6 +41,7 @@ export const settingsSchema = z.object({
     .optional(),
   blocked: z.array(z.string().max(200)).max(200),
   history: z.boolean(),
+  persistCheckpoints: z.boolean().optional(),
   retentionDays: z.number().int().min(1).max(365),
   theme: z.enum(["system", "light", "dark"]),
   onboarded: z.boolean(),
@@ -109,11 +110,13 @@ export interface ProcessingPlan {
   inputTokenUpperBound: number;
   outputTokenUpperBound: number;
   summaryByteLimit: number;
+  excerptRecovery?: boolean;
 }
 export interface SummaryArtifact {
   stepId: number;
   text: string;
   passageIds: string[];
+  recovered?: "size" | "length";
 }
 export interface RateLimitMetadata {
   retryAfterSeconds?: number;

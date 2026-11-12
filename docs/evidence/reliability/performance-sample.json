@@ -1,0 +1,5 @@
+{
+  "browser": "157.0.8103.50",
+  "popupReadyMs": 624,
+  "method": "Single navigation to popup.html in a fresh isolated extension profile, through visible heading assertion. Includes Playwright polling overhead; not a toolbar popup benchmark."
+}

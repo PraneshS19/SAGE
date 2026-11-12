@@ -11,7 +11,7 @@ import { generate } from "../../src/lib/provider";
 import { prepareResearch, executePlan } from "../../src/lib/processing";
 const enabled = process.env.SAGE_EVALUATE === "1";
 it.skipIf(!enabled)(
-  "evaluates real local Phi-3 on public original research fixtures",
+  "evaluates the selected local model against original and held-out fixtures",
   async () => {
     const provider = {
       ...defaults.provider,
@@ -79,6 +79,52 @@ it.skipIf(!enabled)(
           "Summarize the batch observations and limitations. Give the exact minimum and maximum batch observation counts only if supported. Cite original passage IDs.",
       })),
     );
+    const heldOut = (id: string, text: string): Source => ({
+      id,
+      title: id,
+      kind: "docx",
+      url: "",
+      passages: passages(text, id),
+    });
+    cases.push(
+      {
+        name: "held-out-table",
+        sources: [
+          heldOut(
+            "s-table",
+            "## Meter audit\n\n| Region | Samples | Faults |\n| North | 84 | 3 |\n| South | 61 | 7 |",
+          ),
+        ],
+        question:
+          "How many South samples and faults are reported? Do not use North values. Cite a passage.",
+      },
+      {
+        name: "held-out-conflict",
+        sources: [
+          heldOut(
+            "s-brief",
+            "## Service status\n\nThe morning briefing reports the east gate was open at 09:00.",
+          ),
+          heldOut(
+            "s-log",
+            "## Service status\n\nThe morning log reports the east gate was closed at 09:00. Neither record gives a reason.",
+          ),
+        ],
+        question:
+          "What do the reports say about the east gate at 09:00? Preserve disagreement and cite both sources.",
+      },
+      {
+        name: "held-out-missing",
+        sources: [
+          heldOut(
+            "s-ledger",
+            "## Service costs\n\nThe audit lists a deposit of 91 euros. The remaining balance was not disclosed.",
+          ),
+        ],
+        question:
+          "What was the total cost? State if the information is insufficient. Cite the evidence.",
+      },
+    );
     const results: unknown[] = [];
     for (const item of cases) {
       const started = Date.now();
@@ -89,6 +135,7 @@ it.skipIf(!enabled)(
       let completedSteps = 0;
       let totalSourceBatches = 1;
       let completedSourceBatches = 0;
+      let recoveredSteps = 0;
       try {
         const draft = prepareResearch(
           item.sources,
@@ -111,6 +158,7 @@ it.skipIf(!enabled)(
             },
             async (_step, notes) => {
               completedSteps = notes.length;
+              recoveredSteps = notes.filter((n) => n.recovered).length;
               completedSourceBatches = notes.filter(
                 (n) => draft.plan!.steps[n.stepId]?.kind === "map",
               ).length;
@@ -130,6 +178,8 @@ it.skipIf(!enabled)(
             },
             effectiveCapabilities(provider).outputTokens,
           );
+          if (output.includes("[Output stopped at the configured token limit"))
+            throw new Error("Direct answer reached output limit.");
           completedSteps = 1;
           completedSourceBatches = 1;
         }
@@ -143,6 +193,7 @@ it.skipIf(!enabled)(
         plannedRequests: steps,
         actualCalls,
         completedSteps,
+        recoveredSteps,
         completedSourceBatches,
         totalSourceBatches,
         sourceCharacters: item.sources
@@ -165,9 +216,9 @@ it.skipIf(!enabled)(
         review:
           "Metrics are mechanical checks, not proof of semantic accuracy. Review against tests/fixtures/corpus.ts.",
       });
-      await mkdir("docs", { recursive: true });
+      await mkdir("docs/evidence/reliability", { recursive: true });
       await writeFile(
-        `docs/beta-${provider.model.replace(/[^a-z0-9]/gi, "-")}-evaluation.json`,
+        `docs/evidence/reliability/${provider.model.replace(/[^a-z0-9]/gi, "-")}-evaluation.json`,
         JSON.stringify(
           {
             testedAt: new Date().toISOString(),
@@ -188,7 +239,7 @@ it.skipIf(!enabled)(
         ),
       );
     }
-    expect(results).toHaveLength(7);
+    expect(results).toHaveLength(10);
   },
   600000,
 );

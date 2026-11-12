@@ -12,6 +12,32 @@ export function migrateSettings(raw: unknown): Settings {
 export async function getSettings() {
   return migrateSettings((await chrome.storage.local.get("settings")).settings);
 }
+const checkpointKey = "researchCheckpoint";
+export async function clearResearchCheckpoint() {
+  await chrome.storage.local.remove(checkpointKey);
+}
+export async function loadResearchCheckpoint() {
+  if (!(await getSettings()).persistCheckpoints) return;
+  const raw = (await chrome.storage.local.get(checkpointKey))[checkpointKey];
+  const {
+    jobs: [job],
+  } = validHistory(raw === undefined ? [] : [raw]);
+  if (
+    job?.draft.plan &&
+    job.status !== "complete" &&
+    Date.now() - job.updated <= 86_400_000
+  )
+    return job;
+  if (raw !== undefined) await clearResearchCheckpoint();
+}
+export async function saveResearchCheckpoint(job: Job) {
+  if (!job.draft.plan || !(await getSettings()).persistCheckpoints) return;
+  const safe = structuredClone(job);
+  safe.draft.provider.apiKey = "";
+  delete safe.draft.resume;
+  if (new TextEncoder().encode(JSON.stringify(safe)).length <= 1_500_000)
+    await chrome.storage.local.set({ [checkpointKey]: safe });
+}
 export async function history() {
   const settings = await getSettings();
   const data = await chrome.storage.local.get("history");

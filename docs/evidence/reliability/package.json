@@ -1,0 +1,10 @@
+{
+  "version": "0.1.3",
+  "sha256": "525d4c74803620643ecb4c2ecd3885dcd20c47a431370e10845fcd963cf9633e",
+  "bytes": 798413,
+  "runtimeFiles": 22,
+  "checksumsVerified": 28,
+  "independentBuildIdentical": true,
+  "prior012ZipUnchanged": true,
+  "defaultHostGrants": []
+}

@@ -1,3 +1,9 @@
+# 0.1.3 reliability update
+
+The 34-feature inventory below remains the baseline. Current long-job results, checkpoint tests, citation limitations and functional browser evidence are in [release verification](RELEASE_VERIFICATION.md). A completed request and full processing coverage do not guarantee a factually complete synthesis.
+
+---
+
 # Feature matrix — Functional alpha 0.1.1
 
 The v0.2 architecture work retains Functional alpha 0.1.1. This matrix keeps all 34 original rows. Baseline observations remain historical where no new verification was performed. Current evidence adds model-specific 4K/32K/128K switching, new real progressive-size evaluation and native Helium toolbar/panel opening. See TEST_REPORT.md for the exact current scope.

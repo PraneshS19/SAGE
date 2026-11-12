@@ -1,6 +1,7 @@
 import { it, expect } from "vitest";
 it("stops synthesis when an intermediate result is visibly truncated", async () => {
   const draft = prepareResearch([source], "Summarize", provider, [], true);
+  draft.plan!.excerptRecovery = false;
   let calls = 0;
   await expect(
     executePlan(
@@ -166,6 +167,7 @@ it("cancels between steps without initiating remaining requests", async () => {
 });
 it("rejects oversized generated notes before synthesis rather than silently truncating", async () => {
   const draft = prepareResearch([source], "Summarize", provider, [], true);
+  draft.plan!.excerptRecovery = false;
   let calls = 0;
   await expect(
     executePlan(
@@ -181,3 +183,50 @@ it("rejects oversized generated notes before synthesis rather than silently trun
   ).rejects.toThrow("approved size limit");
   expect(calls).toBe(1);
 });
+
+it.each(["size", "length"] as const)(
+  "recovers %s-limited intermediate notes with scoped original excerpts",
+  async (kind) => {
+    const draft = prepareResearch(
+      [source],
+      "Summarize participants",
+      provider,
+      [],
+      true,
+    );
+    const calls: string[] = [];
+    const summaries = await executePlan(
+      draft,
+      new AbortController().signal,
+      async (messages, _signal, emit) => {
+        calls.push(messages[0]!.content);
+        if (calls.length === 1)
+          await emit(
+            kind === "size"
+              ? "x".repeat(3000)
+              : "Partial [Output stopped at the configured token limit and may be incomplete.]",
+          );
+        else await emit("A final answer or intermediate note.");
+      },
+      async () => {},
+      async () => {},
+    );
+    const recovered = summaries[0]!;
+    expect(recovered.recovered).toBe(kind);
+    const records = JSON.parse(recovered.text) as {
+      passageId: string;
+      quote: string;
+    }[];
+    expect(records.length).toBeGreaterThan(0);
+    for (const r of records) {
+      expect(recovered.passageIds).toContain(r.passageId);
+      expect(source.passages.find((p) => p.id === r.passageId)?.text).toContain(
+        r.quote,
+      );
+    }
+    expect(calls).toHaveLength(draft.plan!.steps.length);
+    expect(new TextEncoder().encode(recovered.text).length).toBeLessThanOrEqual(
+      draft.plan!.summaryByteLimit,
+    );
+  },
+);

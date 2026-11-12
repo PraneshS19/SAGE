@@ -8,7 +8,7 @@ if (!process.env.SAGE_BROWSER)
   );
 const root = await mkdtemp(path.resolve("test-results/recovery-"));
 await writeFile("test-results/recovery-path.txt", root);
-const out = path.resolve(".output/chrome-mv3");
+const out = path.resolve(".output/v0.1.3/chrome-mv3");
 const context = await chromium.launchPersistentContext(
   path.join(root, "profile"),
   {

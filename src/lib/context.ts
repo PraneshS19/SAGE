@@ -98,7 +98,9 @@ export function makeDraft(
   };
 }
 export function references(output: string, sources: Source[]) {
-  const ids = [...output.matchAll(/\[([^\]\n]+)\]/g)].map((m) => m[1]!);
+  const ids = [...output.matchAll(/\[([^\]\n]+)\]/g)].map((m) =>
+    referenceLabel(m[1]!),
+  );
   return [...new Set(ids)]
     .filter(
       (id) => id.includes("-p") || /^(?:s[\w-]+|R\d+|\d+|id[:=].*)$/.test(id),
@@ -123,13 +125,19 @@ export function references(output: string, sources: Source[]) {
       };
     });
 }
+function referenceLabel(label: string) {
+  return label
+    .replace(/^(?:passage(?:\s*id)?|source(?:\s*id)?)\s*:\s*/i, "")
+    .trim();
+}
 export function citationDisplay(output: string, sources: Source[]): string {
   const refs = new Map(references(output, sources).map((r) => [r.id, r]));
   return output.replace(
     /\[([^\]\n]+)\](?:\([^\n)]*\))?/g,
-    (raw, id: string) => {
+    (raw, label: string) => {
+      const id = referenceLabel(label);
       const ref = refs.get(id);
-      if (!ref) return raw;
+      if (!ref) return raw === `[${label}]` ? raw : label;
       // Never retain a model-supplied URL attached to a source identifier.
       return ref.passage ? `[${id}]` : `[Unverified reference: ${id}]`;
     },

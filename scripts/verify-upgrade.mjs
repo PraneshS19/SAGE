@@ -10,8 +10,7 @@ import { chromium } from "@playwright/test";
 import { unzipSync } from "fflate";
 
 const previousZip =
-  process.env.SAGE_PREVIOUS_ZIP ||
-  "docs/archive/alpha-0.1.1/sage-extension-0.1.1-chrome.zip";
+  process.env.SAGE_PREVIOUS_ZIP || "dist/SAGE-Release/sage-extension.zip";
 const previous = unzipSync(await readFile(previousZip));
 const sandbox = await mkdtemp(path.resolve("test-results/upgrade-"));
 const unpacked = path.join(sandbox, "extension");
@@ -50,7 +49,7 @@ async function surface() {
 }
 try {
   const before = await surface();
-  assert.equal(before.version, "0.1.1");
+  assert.equal(before.version, "0.1.2");
   const fixture = await before.page.evaluate(async () => {
     const state = (await chrome.runtime.sendMessage({ type: "state" })).data;
     const provider = {
@@ -103,7 +102,7 @@ try {
     return (await chrome.runtime.sendMessage({ type: "state" })).data;
   });
   await context.close();
-  await cp(path.resolve("dist/SAGE-Release/sage-extension"), unpacked, {
+  await cp(path.resolve("dist/SAGE-0.1.3/sage-extension"), unpacked, {
     recursive: true,
   });
   context = await launch();
@@ -111,14 +110,14 @@ try {
   const state = await after.page.evaluate(
     async () => (await chrome.runtime.sendMessage({ type: "state" })).data,
   );
-  assert.equal(after.version, "0.1.2");
+  assert.equal(after.version, "0.1.3");
   assert.equal(after.origin, before.origin);
   assert.deepEqual(state.settings, fixture.settings);
   assert.deepEqual(state.history, fixture.history);
   assert.equal(state.history[0].id, "upgrade-history");
-  await mkdir("docs/evidence/portable", { recursive: true });
+  await mkdir("docs/evidence/reliability", { recursive: true });
   await writeFile(
-    "docs/evidence/portable/upgrade.json",
+    "docs/evidence/reliability/upgrade.json",
     JSON.stringify(
       {
         from: before.version,

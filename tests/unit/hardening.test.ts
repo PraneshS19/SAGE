@@ -27,6 +27,10 @@ it("rejects fabricated and ambiguous references and removes model-supplied citat
     passages: passages("Known fact", "s1"),
   };
   const id = a.passages[0]!.id;
+  expect(references(`[passageId: ${id}]`, [a])[0]?.passage?.id).toBe(id);
+  expect(citationDisplay(`[passageId: ${id}](https://fake.test)`, [a])).toBe(
+    `[${id}]`,
+  );
   expect(
     citationDisplay(`[${id}](https://evil.test) [s1-p999-fake] [R999]`, [a]),
   ).toBe(

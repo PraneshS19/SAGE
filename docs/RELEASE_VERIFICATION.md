@@ -1,3 +1,25 @@
+# 0.1.3 Research Reliability and Accuracy
+
+**Functional Alpha.** Built on `research-reliability-0.1.3` with the 0.1.2 portable ZIP left in place. New WXT output is `.output/v0.1.3/chrome-mv3` and the distribution is `dist/SAGE-0.1.3`. Installation requires only a compatible browser and the chosen inference provider. See [safe installation and updates](INSTALL.md).
+
+## Work and evidence
+
+1. Diagnosed intermediate size and token termination, pooled numeric evidence, citation formatting and loss of unfinished session state. See the [architecture](MODEL_ARCHITECTURE.md) and [quality thresholds](RELIABILITY_GATES.md).
+2. Added disclosed excerpt recovery within the existing request budget, claim-local numeric checks and inert model links. Valid citations still navigate via original source records. Added independently opt-in, bounded restart checkpoints.
+3. Verified the pipeline with controlled providers and real Phi-3 and Qwen. Completed analysis is distinct from factual quality. See the [model evaluation](MODEL_EVALUATION.md).
+
+## Real Helium results
+
+Windowed Helium 0.21.2.1 / Chromium 157.0.8103.50 loaded the unchanged versioned manifest in a fresh Windows profile. All eight generations completed, including webpage summary and follow-up, model switching, DOCX summary and Q&A, text PDF, long DOCX and multi-tab comparison. Output latency was 3.8–27.0 seconds. First visible tokens were sampled at roughly 2.8–23.0 seconds. These are one-run measurements.
+
+The long DOCX completed all five steps in 27.0 seconds with one excerpt recovery. It described the observational limitation, but gave malformed references and did not provide the requested overall range of 31–54. The accuracy gate therefore remains open. The isolated Ollama server failure and reconnection took 18.3 seconds in this harness. History persisted after restart. Review cancellation sent no cloud request. Recorded nonlocal extension traffic was empty. [Live workflow data](evidence/reliability/helium-live.json)
+
+The same-path 0.1.2 upgrade preserved the ID, settings, credential fields, skills, profiles and saved history in a dedicated profile. [Upgrade evidence](evidence/reliability/upgrade.json)
+
+Native gestures, a long PDF stress test, macOS, Linux, a second computer, live cloud inference and GPT-OSS 120B were not independently verified in this milestone. The feature matrix retains those scope limits.
+
+---
+
 # SAGE 0.1.2 release verification
 
 **Functional Alpha.** This milestone covers portable installation, onboarding and release engineering. The existing long-document and grounding limitations remain. See [release readiness](RELEASE_READINESS.md), [known limitations](KNOWN_LIMITATIONS.md) and the [34-feature inventory](FEATURE_MATRIX.md).
@@ -29,3 +51,14 @@ Paid cloud inference and live OpenRouter credentials were not used. The controll
 The final reproducible package completed seven live generations with Phi-3 and Qwen, including page follow-up, model switching, DOCX, text PDF and comparison. Browser restart restored history. Cloud review cancellation sent nothing, and the recorded nonlocal request list is empty. The models were already installed. Per-generation latency ranged from 2.8 to 11.5 seconds in the final run. The test server used only a process-scoped origin allowlist, and the user installation was not modified. [Final staged workflow](evidence/portable/helium-final.json)
 
 Release scripts are available locally and configured in GitHub Actions. CI was not run remotely. The local Git baseline does not publish the source or package.
+
+## Final deterministic and distribution checks
+
+- TypeScript and ESLint passed. Vitest reported 113 passing and two optional live suites skipped. [Vitest log](evidence/reliability/vitest.txt)
+- Sandboxed Helium, Edge 157.0.4341.42 and Brave 157.1.99.56 each passed 14 cases and skipped their opt-in live test. The shared suite checks cancellation with an explicitly held stream. The expanded batch test closes and relaunches the actual browser profile, confirms the retained completed step, and checks no inference runs before approval. [Helium](evidence/reliability/helium-e2e.txt) · [Edge](evidence/reliability/edge-e2e.txt) · [Brave](evidence/reliability/brave-e2e.txt)
+- npm audit reported zero known advisories. The production manifest has no default host grants or fixed key. The source and package scans found no matching credential or machine-specific origin patterns. These checks are scoped. [Audit output](evidence/reliability/npm-audit.json)
+- The versioned ZIP contains 22 runtime files. All 28 distribution checksums verified. An independent build using the locked dependency installation produced identical ZIP bytes. The 0.1.2 ZIP still matches its published local checksum. [Package record](evidence/reliability/package.json)
+- The live test sampled a 5.6-second preload, 15,534,384 bytes of renderer heap in use, and JSON string lengths of 44,842 local and 4,061 session characters. The separate fixture startup sample was 624 ms. These are single samples. Extraction latency, peak memory and cross-device performance were not isolated.
+
+ZIP: `dist/SAGE-0.1.3/sage-extension-0.1.3.zip`  
+SHA-256: `525d4c74803620643ecb4c2ecd3885dcd20c47a431370e10845fcd963cf9633e`

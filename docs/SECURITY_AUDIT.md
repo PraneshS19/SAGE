@@ -1,3 +1,11 @@
+# 0.1.3 security changes
+
+Model-generated links render as text in answers. Source navigation still uses the trusted extracted source records and browser permissions. Recognized citation labels are resolved against a unique original passage, and model-supplied inline destinations are removed from answer text used for display, copy and export. A recognized reference does not establish relevance or truth.
+
+Excerpt recovery uses only the selected step's original passage scope. Review discloses that excerpts can appear in later approved requests. There are no new permissions, automatic cloud calls or changes to manifest identity behavior. The restart option stores one local credential-free checkpoint only after opt-in. The snapshot contains sensitive selected text. Browser storage is not encrypted, and old checkpoints are expired on access. See the privacy guide for deletion behavior.
+
+---
+
 # Security audit — 0.1.1, 2026-11-11
 
 This is a source review plus deterministic and local-browser verification, not a penetration-test certification. No Git metadata is present, so repository history could not be scanned for old secrets.

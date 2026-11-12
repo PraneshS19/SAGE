@@ -8,7 +8,7 @@ if (!process.env.SAGE_BROWSER)
     "Set SAGE_BROWSER to the Helium executable before running this check.",
   );
 const profile = await mkdtemp(path.resolve("test-results/native-helium-"));
-const output = path.resolve(".output/chrome-mv3");
+const output = path.resolve(".output/v0.1.3/chrome-mv3");
 const browser = await chromium.launchPersistentContext(profile, {
   executablePath: process.env.SAGE_BROWSER,
   channel: "chromium",

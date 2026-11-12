@@ -3,8 +3,8 @@ import { mkdir, readFile, readdir, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { unzipSync, zipSync } from "fflate";
 
-const build = path.resolve(".output/chrome-mv3");
-const release = path.resolve("dist/SAGE-Release");
+const build = path.resolve(".output/v0.1.3/chrome-mv3");
+const release = path.resolve("dist/SAGE-0.1.3");
 const version = JSON.parse(await readFile("package.json", "utf8")).version;
 const digest = (bytes) => createHash("sha256").update(bytes).digest("hex");
 const rootFiles = new Set([
@@ -143,7 +143,7 @@ async function put(name, bytes) {
 }
 for (const [name, bytes] of Object.entries(entries))
   await put(`sage-extension/${name}`, bytes);
-await put("sage-extension.zip", archive);
+await put(`sage-extension-${version}.zip`, archive);
 for (const guide of [
   "INSTALL.md",
   "QUICK_START.md",
@@ -159,7 +159,7 @@ const previous = await realpath(release).catch((error) => {
 });
 if (previous) {
   assert(
-    path.relative(await realpath(parent), previous) === "SAGE-Release",
+    path.relative(await realpath(parent), previous) === "SAGE-0.1.3",
     "Release path resolves outside the intended directory",
   );
   // Only replace generated distribution folders containing our checksum manifest.
