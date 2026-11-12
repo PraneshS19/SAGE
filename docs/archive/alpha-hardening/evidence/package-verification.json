@@ -1,0 +1,10 @@
+{
+  "version": "0.1.1",
+  "archive": ".output\\sage-extension-0.1.1-chrome.zip",
+  "sha256": "7f57900c3d6c99e04d24668a6169b6f80d53ee506c835c0588c6b26fbab857c1",
+  "bytes": 762261,
+  "files": 22,
+  "allArchiveFilesMatchBuild": true,
+  "manifestVersion": 3,
+  "defaultHostGrants": []
+}

@@ -1,0 +1,50 @@
+ExpectError: expect(locator).toContainText(expected) failed
+
+Locator: getByRole('status')
+Expected substring: "Connected."
+Received string:    "Connection check failed. 0 models available. Cannot reach Ollama at http://127.0.0.1:11434. Ollama is not running. Start Ollama ('ollama serve' or open the Ollama desktop app)."
+Timeout: 60000ms
+
+Call log:
+  - Expect "toContainText" getByRole('status') with timeout 60000ms
+  - waiting for getByRole('status')
+    33 × locator resolved to <div role="status" class="progress">Working…</div>
+       - unexpected value "Working…"
+    85 × locator resolved to <p role="status" class="notice">Connection check failed. 0 models available. Cann…</p>
+       - unexpected value "Connection check failed. 0 models available. Cannot reach Ollama at http://127.0.0.1:11434. Ollama is not running. Start Ollama ('ollama serve' or open the Ollama desktop app)."
+
+    at captureRawStack (<local-workspace>\node_modules\playwright-core\lib\coreBundle.js:9551:17)
+    at callMatcherAsStep (<local-workspace>\node_modules\playwright\lib\matchers\expect.js:13342:57)
+    at Object.toContainText (<local-workspace>\node_modules\playwright\lib\matchers\expect.js:13334:23)
+    at <local-workspace>\scripts\helium-workflows.mjs:76:42 {
+  matcherResult: {
+    name: 'toContainText',
+    expected: 'Connected.',
+    message: 'expect(locator).toContainText(expected) failed\n' +
+      '\n' +
+      "Locator: getByRole('status')\n" +
+      'Expected substring: "Connected."\n' +
+      `Received string:    "Connection check failed. 0 models available. Cannot reach Ollama at http://127.0.0.1:11434. Ollama is not running. Start Ollama ('ollama serve' or open the Ollama desktop app)."\n` +
+      'Timeout: 60000ms\n' +
+      '\n' +
+      'Call log:\n' +
+      `  - Expect "toContainText" getByRole('status') with timeout 60000ms\n` +
+      "  - waiting for getByRole('status')\n" +
+      '    33 × locator resolved to <div role="status" class="progress">Working…</div>\n' +
+      '       - unexpected value "Working…"\n' +
+      '    85 × locator resolved to <p role="status" class="notice">Connection check failed. 0 models available. Cann…</p>\n' +
+      `       - unexpected value "Connection check failed. 0 models available. Cannot reach Ollama at http://127.0.0.1:11434. Ollama is not running. Start Ollama ('ollama serve' or open the Ollama desktop app)."\n`,
+    pass: false,
+    actual: "Connection check failed. 0 models available. Cannot reach Ollama at http://127.0.0.1:11434. Ollama is not running. Start Ollama ('ollama serve' or open the Ollama desktop app).",
+    log: [
+      `  - Expect "toContainText" getByRole('status') with timeout 60000ms`,
+      "  - waiting for getByRole('status')",
+      '    33 × locator resolved to <div role="status" class="progress">Working…</div>',
+      '       - unexpected value "Working…"',
+      '    85 × locator resolved to <p role="status" class="notice">Connection check failed. 0 models available. Cann…</p>',
+      `       - unexpected value "Connection check failed. 0 models available. Cannot reach Ollama at http://127.0.0.1:11434. Ollama is not running. Start Ollama ('ollama serve' or open the Ollama desktop app)."`
+    ],
+    timeout: 60000,
+    ariaSnapshot: "- status: Connection check failed. 0 models available. Cannot reach Ollama at http://127.0.0.1:11434. Ollama is not running. Start Ollama ('ollama serve' or open the Ollama desktop app)."
+  }
+}

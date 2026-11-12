@@ -1,0 +1,403 @@
+{
+  "testedAt": "2026-11-12T10:25:56.907Z",
+  "browser": "157.0.8103.50",
+  "productionManifestUnchanged": true,
+  "results": [
+    {
+      "name": "A normal webpage",
+      "model": "phi3:3.8b",
+      "status": "complete",
+      "output": "The pilot reported a 12% lower water use over six weeks among 42 volunteers. [s569b4fc5-p1-ae815b19]\nThe pilot lacks a randomized control group. [s569b4fc5-p1-ae815b19]\n\n\nThe text provided contains all the information necessary to answer the question. The first sentence summarizes the pilot's reported outcome, and the second sentence notes its limitation.\n\n\n\n",
+      "sources": [
+        {
+          "id": "s569b4fc5",
+          "kind": "page",
+          "metadata": {
+            "domain": "127.0.0.1",
+            "extractedAt": 1794479183301,
+            "language": "en",
+            "method": "readability",
+            "warnings": [],
+            "wordCount": 22
+          },
+          "passages": [
+            {
+              "id": "s569b4fc5-p1-ae815b19",
+              "offset": 0,
+              "text": "The pilot included 42 volunteers and reported 12% lower water use over six weeks. It did not use a randomized control group."
+            }
+          ],
+          "tabId": 1032135429,
+          "title": "Garden pilot",
+          "url": "http://127.0.0.1:60048/pilot"
+        }
+      ],
+      "elapsedMs": 8762,
+      "firstTokenMs": 6705,
+      "promptTokens": 1191
+    },
+    {
+      "name": "A follow-up",
+      "model": "phi3:3.8b",
+      "status": "complete",
+      "output": "No, the pilot was not randomized. [s569b4fc5-p1-ae815b19]\n\n\n\nThe text provided directly addresses the randomization of the pilot. The citation is included to align with the demand for a specific reference.\n\n\n\n",
+      "sources": [
+        {
+          "id": "s569b4fc5",
+          "kind": "page",
+          "metadata": {
+            "domain": "127.0.0.1",
+            "extractedAt": 1794479183301,
+            "language": "en",
+            "method": "readability",
+            "warnings": [],
+            "wordCount": 22
+          },
+          "passages": [
+            {
+              "id": "s569b4fc5-p1-ae815b19",
+              "offset": 0,
+              "text": "The pilot included 42 volunteers and reported 12% lower water use over six weeks. It did not use a randomized control group."
+            }
+          ],
+          "tabId": 1032135429,
+          "title": "Garden pilot",
+          "url": "http://127.0.0.1:60048/pilot"
+        }
+      ],
+      "elapsedMs": 3747,
+      "firstTokenMs": 2715,
+      "promptTokens": 1469
+    },
+    {
+      "name": "F model switch",
+      "model": "qwen2.5:3b",
+      "status": "complete",
+      "output": "The participant count was 42, with an uncertainty indicated by the lack of a randomized control group as stated in [s569b4fc5-p1-ae815b19].",
+      "sources": [
+        {
+          "id": "s569b4fc5",
+          "kind": "page",
+          "metadata": {
+            "domain": "127.0.0.1",
+            "extractedAt": 1794479183301,
+            "language": "en",
+            "method": "readability",
+            "warnings": [],
+            "wordCount": 22
+          },
+          "passages": [
+            {
+              "id": "s569b4fc5-p1-ae815b19",
+              "offset": 0,
+              "text": "The pilot included 42 volunteers and reported 12% lower water use over six weeks. It did not use a randomized control group."
+            }
+          ],
+          "tabId": 1032135429,
+          "title": "Garden pilot",
+          "url": "http://127.0.0.1:60048/pilot"
+        }
+      ],
+      "elapsedMs": 9881,
+      "firstTokenMs": 8843,
+      "promptTokens": 1192
+    },
+    {
+      "name": "C DOCX summary",
+      "model": "qwen2.5:3b",
+      "status": "complete",
+      "output": "The pilot study conducted with 42 volunteers showed a 12% reduction in water use over six weeks, but it did not utilize a randomized control group, which limits the ability to attribute the observed differences solely to the intervention. [sbd210a91-p2-ae815b19]",
+      "sources": [
+        {
+          "id": "sbd210a91",
+          "kind": "docx",
+          "metadata": {
+            "extractedAt": 1794479215409,
+            "method": "docx-body-xml",
+            "warnings": [
+              "Only body paragraphs and basic tables were extracted. Images, footnotes, comments, tracked deletions, headers and embedded objects may be omitted. No external relationships or embedded code were opened."
+            ],
+            "wordCount": 25
+          },
+          "passages": [
+            {
+              "id": "sbd210a91-p1-2d54dff3",
+              "offset": 0,
+              "section": "Document findings",
+              "text": "# Document findings"
+            },
+            {
+              "id": "sbd210a91-p2-ae815b19",
+              "offset": 21,
+              "section": "Document findings",
+              "text": "The pilot included 42 volunteers and reported 12% lower water use over six weeks. It did not use a randomized control group."
+            }
+          ],
+          "title": "pilot.docx",
+          "url": ""
+        }
+      ],
+      "elapsedMs": 3783,
+      "firstTokenMs": 2742,
+      "promptTokens": 1230
+    },
+    {
+      "name": "C DOCX question",
+      "model": "qwen2.5:3b",
+      "status": "complete",
+      "output": "The pilot study included 42 volunteers. [sbd210a91-p2-ae815b19]",
+      "sources": [
+        {
+          "id": "sbd210a91",
+          "kind": "docx",
+          "metadata": {
+            "extractedAt": 1794479215409,
+            "method": "docx-body-xml",
+            "warnings": [
+              "Only body paragraphs and basic tables were extracted. Images, footnotes, comments, tracked deletions, headers and embedded objects may be omitted. No external relationships or embedded code were opened."
+            ],
+            "wordCount": 25
+          },
+          "passages": [
+            {
+              "id": "sbd210a91-p1-2d54dff3",
+              "offset": 0,
+              "section": "Document findings",
+              "text": "# Document findings"
+            },
+            {
+              "id": "sbd210a91-p2-ae815b19",
+              "offset": 21,
+              "section": "Document findings",
+              "text": "The pilot included 42 volunteers and reported 12% lower water use over six weeks. It did not use a randomized control group."
+            }
+          ],
+          "title": "pilot.docx",
+          "url": ""
+        }
+      ],
+      "elapsedMs": 2763,
+      "firstTokenMs": 2742,
+      "promptTokens": 1504
+    },
+    {
+      "name": "D PDF summary",
+      "model": "qwen2.5:3b",
+      "status": "complete",
+      "output": "The pilot study, which involved 42 volunteers, resulted in a 12% decrease in water use over a six-week period. [s5ad7854b-page1-p1-fb0eed81]",
+      "sources": [
+        {
+          "id": "s5ad7854b",
+          "kind": "pdf",
+          "passages": [
+            {
+              "id": "s5ad7854b-page1-p1-fb0eed81",
+              "offset": 0,
+              "page": 1,
+              "text": "The pilot included 42 volunteers and reported 12% lower water use over six weeks. It did not use a random"
+            }
+          ],
+          "title": "pilot.pdf",
+          "url": ""
+        }
+      ],
+      "elapsedMs": 3767,
+      "firstTokenMs": 2711,
+      "promptTokens": 1172
+    },
+    {
+      "name": "E multi-tab comparison",
+      "model": "qwen2.5:3b",
+      "status": "complete",
+      "output": "The Garden pilot study involved 42 volunteers and observed a 12% decrease in water use over six weeks without a randomized control group, suggesting potential benefits but with a lack of standardization. In contrast, the Garden replication study, conducted over twelve weeks with 210 gardens, showed a 2% reduction in water use. This reduction, however, had a wide confidence interval, ranging from a 3% increase to a 7% reduction, indicating that while there may have been a benefit, it is not statistically significant or consistent across the sample. The replication thus questions the initial pilot's conclusive findings, highlighting the need for further, more controlled studies to confirm the garden's water-saving efficacy.",
+      "sources": [
+        {
+          "id": "s569b4fc5",
+          "kind": "page",
+          "metadata": {
+            "domain": "127.0.0.1",
+            "extractedAt": 1794479249554,
+            "language": "en",
+            "method": "readability",
+            "warnings": [],
+            "wordCount": 22
+          },
+          "passages": [
+            {
+              "id": "s569b4fc5-p1-ae815b19",
+              "offset": 0,
+              "text": "The pilot included 42 volunteers and reported 12% lower water use over six weeks. It did not use a randomized control group."
+            }
+          ],
+          "tabId": 1032135429,
+          "title": "Garden pilot",
+          "url": "http://127.0.0.1:60048/pilot"
+        },
+        {
+          "id": "sbb2a738",
+          "kind": "page",
+          "metadata": {
+            "domain": "127.0.0.1",
+            "extractedAt": 1794479249575,
+            "language": "en",
+            "method": "readability",
+            "warnings": [],
+            "wordCount": 31
+          },
+          "passages": [
+            {
+              "id": "sbb2a738-p1-fccf8f4c",
+              "offset": 0,
+              "text": "A randomized twelve-week trial with 210 gardens estimated a 2% reduction. Its 95% confidence interval ranged from a 3% increase to a 7% reduction. This did not establish a clear benefit."
+            }
+          ],
+          "tabId": 1032135430,
+          "title": "Garden replication",
+          "url": "http://127.0.0.1:60048/replication"
+        }
+      ],
+      "elapsedMs": 4719,
+      "firstTokenMs": 2637,
+      "promptTokens": 1325
+    }
+  ],
+  "extensionRequests": [
+    {
+      "url": "http://127.0.0.1:11434/api/tags",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:11434/api/tags",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:11434/api/chat",
+      "method": "POST",
+      "model": "phi3:3.8b"
+    },
+    {
+      "url": "http://127.0.0.1:11434/api/tags",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:11434/api/chat",
+      "method": "POST",
+      "model": "phi3:3.8b"
+    },
+    {
+      "url": "http://127.0.0.1:11434/api/chat",
+      "method": "POST",
+      "model": "phi3:3.8b"
+    },
+    {
+      "url": "http://127.0.0.1:11434/api/chat",
+      "method": "POST",
+      "model": "phi3:3.8b"
+    },
+    {
+      "url": "http://127.0.0.1:11434/api/tags",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:11434/api/ps",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:11434/api/tags",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:11434/api/chat",
+      "method": "POST",
+      "model": "qwen2.5:3b"
+    },
+    {
+      "url": "http://127.0.0.1:11434/api/chat",
+      "method": "POST",
+      "model": "qwen2.5:3b"
+    },
+    {
+      "url": "http://127.0.0.1:11434/api/chat",
+      "method": "POST",
+      "model": "qwen2.5:3b"
+    },
+    {
+      "url": "http://127.0.0.1:11434/api/chat",
+      "method": "POST",
+      "model": "qwen2.5:3b"
+    },
+    {
+      "url": "http://127.0.0.1:11434/api/chat",
+      "method": "POST",
+      "model": "qwen2.5:3b"
+    }
+  ],
+  "pageRequests": 2,
+  "origin": "chrome-extension://<test-extension-id>",
+  "models": [
+    "qwen2.5:3b",
+    "phi3:3.8b"
+  ],
+  "preloadMs": 5076,
+  "diagnostics": {
+    "ok": true,
+    "provider": "ollama",
+    "model": "phi3:3.8b",
+    "endpoint": "http://127.0.0.1:11434",
+    "connectionStatus": "Connected (HTTP 200 OK)",
+    "corsStatus": "Accepted (HTTP 200 OK)",
+    "modelStatus": "Installed and ready (phi3:3.8b)",
+    "inferenceStatus": "Passed (streaming response verified)",
+    "models": [
+      "qwen2.5:3b",
+      "phi3:3.8b"
+    ],
+    "steps": [
+      {
+        "name": "Server Reachability",
+        "status": "pass",
+        "message": "Connected to http://127.0.0.1:11434 (ollama)"
+      },
+      {
+        "name": "Browser Origin Acceptance",
+        "status": "pass",
+        "message": "Origin accepted by server (HTTP 200 OK)"
+      },
+      {
+        "name": "Available Models",
+        "status": "pass",
+        "message": "2 model(s) available: qwen2.5:3b, phi3:3.8b"
+      },
+      {
+        "name": "Selected Model",
+        "status": "pass",
+        "message": "Model 'phi3:3.8b' is available on the server"
+      },
+      {
+        "name": "Inference Test",
+        "status": "pass",
+        "message": "Minimal test prompt completed successfully"
+      },
+      {
+        "name": "Streaming Support",
+        "status": "pass",
+        "message": "Streaming verified (received tokens: \"OK.\")"
+      }
+    ],
+    "summary": "All 6 checks passed! Connected to Ollama with model 'phi3:3.8b' and verified local streaming inference."
+  },
+  "popupClosure": true,
+  "cloudCancelledBeforeDispatch": true,
+  "storageBytes": {
+    "local": 17519,
+    "session": 4175
+  },
+  "uiHeap": {
+    "usedSize": 12406464,
+    "totalSize": 15900672,
+    "embedderHeapUsedSize": 1545176,
+    "backingStorageSize": 1020481
+  },
+  "nonlocalExtensionRequests": [],
+  "failure": "Cannot read properties of undefined (reading 'title')"
+}

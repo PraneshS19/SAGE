@@ -1,0 +1,27 @@
+
+> sage-extension@0.1.2 test:e2e
+> playwright test
+
+
+Running 15 tests using 1 worker
+
+(node:2676) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  1 tests\e2e\extension.spec.ts:206:1 › popup and provider setup are real extension pages; no initial provider requests (942ms)
+  ok  2 tests\e2e\extension.spec.ts:275:1 › selected sources extract, preview before send, stream and survive popup closure (3.2s)
+  ok  3 tests\e2e\extension.spec.ts:331:1 › blocked domains, missing provider grants, fake citations and untrusted messages are denied (195ms)
+  ok  4 tests\e2e\extension.spec.ts:406:1 › history is opt-in, restoration works and cancellation preserves partial output (1.3s)
+  ok  5 tests\e2e\extension.spec.ts:445:1 › worker restart marks unfinished jobs interrupted (191ms)
+  ok  6 tests\e2e\extension.spec.ts:461:1 › local PDF extraction uses the bundled worker and preserves page references (1.5s)
+  ok  7 tests\e2e\extension.spec.ts:523:1 › skills can be created, found, edited, used and deleted; no remote asset traffic (579ms)
+  ok  8 tests\e2e\extension.spec.ts:556:1 › workspace fallback, dark theme and corrupted-settings recovery (931ms)
+  ok  9 tests\e2e\extension.spec.ts:593:1 › long-document processing requires plan consent, excludes passages and preserves provenance (10.6s)
+  ok 10 tests\e2e\extension.spec.ts:649:1 › failed long jobs require fresh retry consent and skip completed batches (10.1s)
+  ok 11 tests\e2e\extension.spec.ts:688:1 › DOCX upload, history rename, switching during generation, and Markdown export work (1.8s)
+  ok 12 tests\e2e\extension.spec.ts:758:1 › changing provider cancels the active request and preserves saved provider credentials (174ms)
+  ok 13 tests\e2e\extension.spec.ts:795:1 › three distinct sources retain identities, citations navigate and stale source navigation is refused (822ms)
+  ok 14 tests\e2e\extension.spec.ts:849:1 › model-specific contexts change planning and survive switching without changing citations (777ms)
+  -  15 tests\e2e\extension.spec.ts:915:1 › real local Phi-3 generation through the extension (opt-in)
+
+  1 skipped
+  14 passed (38.4s)

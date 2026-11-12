@@ -1,0 +1,85 @@
+
+> sage-extension@0.1.1 zip
+> wxt zip
+
+
+WXT 0.21.5
+i Building chrome-mv3 for production with Vite 8.3.7
+[?25l
+⠋ Preparing...[K
+⠋ [1/3] background[K
+⠙ [1/3] background[K
+⠹ [1/3] background[K
+⠸ [1/3] background[K
+⠸ [2/3] extract[K
+⠼ [2/3] extract[K
+⠼ [3/3] options, popup, sidepanel[K
+⠴ [3/3] options, popup, sidepanel[K
+⠦ [3/3] options, popup, sidepanel[K
+⠧ [3/3] options, popup, sidepanel[K
+⠇ [3/3] options, popup, sidepanel[K
+⠏ [3/3] options, popup, sidepanel[K
+⠋ [3/3] options, popup, sidepanel[K
+⠙ [3/3] options, popup, sidepanel[K
+⠹ [3/3] options, popup, sidepanel[K
+⠸ [3/3] options, popup, sidepanel[K
+⠼ [3/3] options, popup, sidepanel[K
+⠴ [3/3] options, popup, sidepanel[K
+⠦ [3/3] options, popup, sidepanel[K
+⠧ [3/3] options, popup, sidepanel[K
+⠇ [3/3] options, popup, sidepanel[K
+⠏ [3/3] options, popup, sidepanel[K
+⠋ [3/3] options, popup, sidepanel[K
+⠙ [3/3] options, popup, sidepanel[K
+⠹ [3/3] options, popup, sidepanel[K
+⠸ [3/3] options, popup, sidepanel[K
+⠼ [3/3] options, popup, sidepanel[K
+⠴ [3/3] options, popup, sidepanel[K
+⠦ [3/3] options, popup, sidepanel[K
+⠧ [3/3] options, popup, sidepanel[K
+⠇ [3/3] options, popup, sidepanel[K
+⠏ [3/3] options, popup, sidepanel[K
+⠋ [3/3] options, popup, sidepanel[K
+⠙ [3/3] options, popup, sidepanel[K
+⠹ [3/3] options, popup, sidepanel[K
+⠸ [3/3] options, popup, sidepanel[K
+⠼ [3/3] options, popup, sidepanel[K
+⠴ [3/3] options, popup, sidepanel[K
+⠦ [3/3] options, popup, sidepanel[K
+⠧ [3/3] options, popup, sidepanel[K
+⠇ [3/3] options, popup, sidepanel[K
+⠏ [3/3] options, popup, sidepanel[K
+⠋ [3/3] options, popup, sidepanel[K
+⠙ [3/3] options, popup, sidepanel[K
+⠹ [3/3] options, popup, sidepanel[K
+⠸ [3/3] options, popup, sidepanel[K
+[K[?25h
+[K[?25h√ Built extension in 5.005 s
+  ├─ .output\chrome-mv3\manifest.json                       864 B    
+  ├─ .output\chrome-mv3\options.html                        552 B    
+  ├─ .output\chrome-mv3\popup.html                          496 B    
+  ├─ .output\chrome-mv3\sidepanel.html                      500 B    
+  ├─ .output\chrome-mv3\background.js                       154.50 kB
+  ├─ .output\chrome-mv3\chunks\App-4fNph3ta.js              389.21 kB
+  ├─ .output\chrome-mv3\chunks\docx-6wjkjp7e.js             9.86 kB  
+  ├─ .output\chrome-mv3\chunks\Markdown-BL9Jkjt7.js         164.30 kB
+  ├─ .output\chrome-mv3\chunks\options-EE51xoHM.js          219 B    
+  ├─ .output\chrome-mv3\chunks\pdf-NkrR2AUw.js              443.69 kB
+  ├─ .output\chrome-mv3\chunks\popup-a84BkB_M.js            217 B    
+  ├─ .output\chrome-mv3\chunks\sidepanel-Dlwv3P4X.js        221 B    
+  ├─ .output\chrome-mv3\extract.js                          47.84 kB 
+  ├─ .output\chrome-mv3\assets\App-BGDFDQpD.css             18.54 kB 
+  ├─ .output\chrome-mv3\assets\pdf.worker.min-CIqJB0yW.mjs  1.27 MB  
+  ├─ .output\chrome-mv3\icons\128.png                       2.52 kB  
+  ├─ .output\chrome-mv3\icons\16.png                        409 B    
+  ├─ .output\chrome-mv3\icons\32.png                        772 B    
+  ├─ .output\chrome-mv3\icons\48.png                        1.19 kB  
+  ├─ .output\chrome-mv3\LICENSE                             10.17 kB 
+  ├─ .output\chrome-mv3\NOTICE                              244 B    
+  └─ .output\chrome-mv3\THIRD_PARTY_NOTICES.txt             142.64 kB
+Σ Total size: 2.66 MB                                     
+i Zipping extension...
+√ Zipped extension in 1.140 s
+  └─ .output\sage-extension-0.1.1-chrome.zip  769.54 kB
+Σ Total size: 769.54 kB                     
+√ Finished in 7.020 s

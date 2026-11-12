@@ -1,0 +1,11 @@
+# Known limitations — Functional alpha 0.1.1
+
+- **P1 release blocker: long synthesis.** Real Phi-3 at context 4096 stopped on oversized intermediate notes after 32.915 seconds (11 planned requests). Reproduce with SAGE_EVALUATE=1, SAGE_MODEL=phi3:3.8b and tests/integration/real-evaluation.test.ts. Fresh retry review can resume validated completed steps; it does not guarantee model compliance.
+- **P1 release blocker: semantic grounding.** Qwen2.5:3b completed the same long fixture in 35.174 seconds but claimed 42–67 instead of 42–71 observations and added unsupported interpretations. Fourteen valid passage IDs did not make those claims correct. Phi can emit unrecognized citation syntax. Inspect original evidence; SAGE does not guarantee entailment.
+- **P2: headless Helium.** Settings connect followed by article navigation produces net::ERR_ABORTED. Windowed testing passes; exact browser-internal cause is unproven. See HELIUM_COMPATIBILITY.md.
+- **P2: native UI/accessibility.** Toolbar anchoring, native selection-menu gesture, native side panel, complete screen-reader/contrast/focus audit remain unverified. Full-tab fallback, labels and dialog Escape are tested, not WCAG certification.
+- **P2: provider coverage.** Real Ollama verified; paid OpenRouter auth/quota and live LM Studio/llama.cpp/custom servers untested. Controlled HTTP/SSE/JSON tests are not live account acceptance.
+- PDF supports local extractable text, not OCR/remote fetching. Empty-text PDF is tested, not a scanned-document corpus. DOCX supports basic body/headings/tables. Long PDF/DOCX and repeated progressive-size stress coverage remain incomplete.
+- Long plans are bounded to 23 sequential requests and four minutes per run, with approximate token estimation. Notes: 1,500 UTF-8 bytes/512 tokens; final: 1,024 tokens. Summaries are lossy. No automatic retries. Session checkpoints survive worker restart, not full browser-session loss; optional history survives browser restart.
+- Live YouTube transcript DOM remains unverified. Dynamic extraction, text fragments and sensitive-URL blocking are heuristic. Local storage is unencrypted; cancellation cannot retract transmitted content; exports outlive extension deletion.
+- Chrome and remote CI were not run. No beta-ready, production-ready or guaranteed research accuracy claim is made.

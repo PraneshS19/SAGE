@@ -1,0 +1,58 @@
+
+> sage-extension@0.1.0 test:e2e
+> playwright test
+
+
+Running 12 tests using 1 worker
+
+(node:4780) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+fixture request GET /api/tags
+  ok  1 tests\e2e\extension.spec.ts:188:1 › popup and provider setup are real extension pages; no initial provider requests (534ms)
+navigation failure {"requestId":"5B0AAD8A4EF347F8FB8ACE41BCD60AF1","timestamp":3668.606332,"type":"Document","errorText":"net::ERR_ABORTED","canceled":true}
+frame navigated about:blank
+  x   2 tests\e2e\extension.spec.ts:209:1 › selected sources extract, preview before send, stream and survive popup closure (10.5s)
+  -   3 tests\e2e\extension.spec.ts:258:1 › blocked domains, missing provider grants, fake citations and untrusted messages are denied
+  -   4 tests\e2e\extension.spec.ts:333:1 › history is opt-in, restoration works and cancellation preserves partial output
+  -   5 tests\e2e\extension.spec.ts:372:1 › worker restart marks unfinished jobs interrupted
+  -   6 tests\e2e\extension.spec.ts:388:1 › local PDF extraction uses the bundled worker and preserves page references
+  -   7 tests\e2e\extension.spec.ts:438:1 › skills can be created, found, edited, used and deleted; no remote asset traffic
+  -   8 tests\e2e\extension.spec.ts:471:1 › workspace fallback, dark theme and corrupted-settings recovery
+  -   9 tests\e2e\extension.spec.ts:508:1 › long-document processing requires plan consent, excludes passages and preserves provenance
+  -  10 tests\e2e\extension.spec.ts:564:1 › DOCX upload, history rename, switching during generation, and Markdown export work
+  -  11 tests\e2e\extension.spec.ts:636:1 › three distinct sources retain identities, citations navigate and stale source navigation is refused
+  -  12 tests\e2e\extension.spec.ts:690:1 › real local Phi-3 generation through the extension (opt-in)
+
+
+  1) tests\e2e\extension.spec.ts:209:1 › selected sources extract, preview before send, stream and survive popup closure 
+
+    Error: page.goto: net::ERR_ABORTED at http://127.0.0.1:62093/article
+    Call log:
+      - navigating to "http://127.0.0.1:62093/article", waiting until "load"
+
+
+      215 |     source.on('download',download=>console.log('download',download.url(),download.suggestedFilename()));
+      216 |   }
+    > 217 |   await source.goto(base + "/article");
+          |                ^
+      218 |   const second = await context.newPage();
+      219 |   await second.goto(base + "/second");
+      220 |   await ui.goto(extension + "/sidepanel.html");
+        at <local-workspace>\tests\e2e\extension.spec.ts:217:16
+
+    Error Context: test-results\extension-selected-sources-d7798-m-and-survive-popup-closure\error-context.md
+
+    Error Context: test-results\extension-selected-sources-d7798-m-and-survive-popup-closure\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\extension-selected-sources-d7798-m-and-survive-popup-closure\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\extension-selected-sources-d7798-m-and-survive-popup-closure\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests\e2e\extension.spec.ts:209:1 › selected sources extract, preview before send, stream and survive popup closure 
+  10 did not run
+  1 passed (15.4s)

@@ -1,0 +1,93 @@
+ExpectError: expect(locator).toBeVisible() failed
+
+Locator: getByRole('dialog')
+Expected: visible
+Timeout: 5000ms
+Error: element(s) not found
+
+Call log:
+  - Expect "toBeVisible" getByRole('dialog') with timeout 5000ms
+  - waiting for getByRole('dialog')
+
+    at captureRawStack (<local-workspace>\node_modules\playwright-core\lib\coreBundle.js:9551:17)
+    at callMatcherAsStep (<local-workspace>\node_modules\playwright\lib\matchers\expect.js:13342:57)
+    at Object.toBeVisible (<local-workspace>\node_modules\playwright\lib\matchers\expect.js:13334:23)
+    at infer (<local-workspace>\scripts\helium-workflows.mjs:129:44)
+    at async file:///<local-workspace>/scripts/helium-workflows.mjs:181:3 {
+  matcherResult: {
+    message: 'expect(locator).toBeVisible() failed\n' +
+      '\n' +
+      "Locator: getByRole('dialog')\n" +
+      'Expected: visible\n' +
+      'Timeout: 5000ms\n' +
+      'Error: element(s) not found\n' +
+      '\n' +
+      'Call log:\n' +
+      `  - Expect "toBeVisible" getByRole('dialog') with timeout 5000ms\n` +
+      "  - waiting for getByRole('dialog')\n",
+    pass: false,
+    actual: undefined,
+    name: 'toBeVisible',
+    expected: 'visible',
+    log: [
+      `  - Expect "toBeVisible" getByRole('dialog') with timeout 5000ms`,
+      "  - waiting for getByRole('dialog')"
+    ],
+    timeout: 5000,
+    ariaSnapshot: '- main:\n' +
+      '  - strong: SAGE\n' +
+      '  - text: PRIVATE RESEARCH\n' +
+      '  - button "Toggle theme"\n' +
+      '  - button "Settings"\n' +
+      '  - text: Local ollama\n' +
+      '  - combobox "Select AI Model":\n' +
+      '    - option "qwen2.5:3b (unverified)" [selected]\n' +
+      '  - button "Refresh models"\n' +
+      '  - button "Preload model"\n' +
+      '  - alert:\n' +
+      '    - text: Reasoning conversation belongs to a different endpoint/model. Start a new conversation; required metadata is never sent across providers.\n' +
+      '    - button "Dismiss"\n' +
+      '  - navigation "Workspace":\n' +
+      '    - button "Page"\n' +
+      '    - button "Research"\n' +
+      '    - button "Skills"\n' +
+      '    - button "History"\n' +
+      '  - text: A LITTLE CLARITY, ON DEMAND\n' +
+      '  - heading "Understand what matters." [level=1]\n' +
+      '  - paragraph: Read deeply, ask better questions, and keep your research yours.\n' +
+      '  - text: SELECTED CONTEXT\n' +
+      '  - heading "Garden pilot" [level=2]\n' +
+      '  - text: 127.0.0.1\n' +
+      '  - button "Refresh"\n' +
+      '  - combobox "Summary style":\n' +
+      '    - option "TL;DR" [selected]\n' +
+      '    - option "Key Points"\n' +
+      '    - option "Detailed"\n' +
+      '    - option "ELI5"\n' +
+      '  - button "Summarize"\n' +
+      '  - button "Import PDF or DOCX"\n' +
+      '  - checkbox "Process oversized context in batches (review request count first)" [checked]\n' +
+      '  - text: Process oversized context in batches (review request count first)\n' +
+      '  - group: 1 source · ~42 context tokens Inspect & exclude\n' +
+      '  - region "AI response":\n' +
+      '    - text: COMPLETE · SAGE\n' +
+      '    - button "Copy output"\n' +
+      '    - button "Regenerate"\n' +
+      '    - button "Export"\n' +
+      '    - heading "Was this randomized? Answer in one sentence with a citation." [level=3]\n' +
+      '    - text: "Answer context: Garden pilot · ollama / phi3:3.8b"\n' +
+      '    - paragraph: "No, the pilot was not randomized, as it explicitly did not include a randomized control group [Unverified reference: sbd3fa3ba-p1-ae815b19-offset:0]."\n' +
+      '    - paragraph: AI interpretation can be wrong. A matched reference identifies source text; it does not verify that the passage supports the claim.\n' +
+      '    - paragraph: No valid passage references were supplied. Support for this answer is unverified.\n' +
+      '    - group: "Evidence checks: semantic support unverified"\n' +
+      '    - group: Unverified reference · sbd3fa3ba-p1-ae815b19-offset:0\n' +
+      '  - text: Ask about your sources\n' +
+      '  - textbox "Ask about your sources":\n' +
+      '    - /placeholder: Ask about this page, or type / for a skill…\n' +
+      '    - text: State the participant count and uncertainty in one sentence. Cite exact passage IDs.\n' +
+      '  - text: 1 selected source · local\n' +
+      '  - button "Review and send question"\n' +
+      '  - checkbox "Include previous conversation (shown in prompt review)" [checked]\n' +
+      '  - text: Include previous conversation (shown in prompt review) Your Private AI Research Companion ○ SAGE'
+  }
+}

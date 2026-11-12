@@ -1,0 +1,55 @@
+
+> sage-extension@0.1.0 test:e2e
+> playwright test
+
+
+Running 12 tests using 1 worker
+
+(node:15580) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  1 tests\e2e\extension.spec.ts:187:1 › popup and provider setup are real extension pages; no initial provider requests (630ms)
+  x   2 tests\e2e\extension.spec.ts:208:1 › selected sources extract, preview before send, stream and survive popup closure (7.4s)
+  -   3 tests\e2e\extension.spec.ts:248:1 › blocked domains, missing provider grants, fake citations and untrusted messages are denied
+  -   4 tests\e2e\extension.spec.ts:323:1 › history is opt-in, restoration works and cancellation preserves partial output
+  -   5 tests\e2e\extension.spec.ts:362:1 › worker restart marks unfinished jobs interrupted
+  -   6 tests\e2e\extension.spec.ts:378:1 › local PDF extraction uses the bundled worker and preserves page references
+  -   7 tests\e2e\extension.spec.ts:428:1 › skills can be created, found, edited, used and deleted; no remote asset traffic
+  -   8 tests\e2e\extension.spec.ts:461:1 › workspace fallback, dark theme and corrupted-settings recovery
+  -   9 tests\e2e\extension.spec.ts:498:1 › long-document processing requires plan consent, excludes passages and preserves provenance
+  -  10 tests\e2e\extension.spec.ts:554:1 › DOCX upload, history rename, switching during generation, and Markdown export work
+  -  11 tests\e2e\extension.spec.ts:626:1 › three distinct sources retain identities, citations navigate and stale source navigation is refused
+  -  12 tests\e2e\extension.spec.ts:680:1 › real local Phi-3 generation through the extension (opt-in)
+
+
+  1) tests\e2e\extension.spec.ts:208:1 › selected sources extract, preview before send, stream and survive popup closure 
+
+    Error: page.goto: net::ERR_ABORTED at http://127.0.0.1:56667/article
+    Call log:
+      - navigating to "http://127.0.0.1:56667/article", waiting until "load"
+
+
+      208 | test("selected sources extract, preview before send, stream and survive popup closure", async () => {
+      209 |   const source = await context.newPage();
+    > 210 |   await source.goto(base + "/article");
+          |                ^
+      211 |   const second = await context.newPage();
+      212 |   await second.goto(base + "/second");
+      213 |   await ui.goto(extension + "/sidepanel.html");
+        at <local-workspace>\tests\e2e\extension.spec.ts:210:16
+
+    Error Context: test-results\extension-selected-sources-d7798-m-and-survive-popup-closure\error-context.md
+
+    Error Context: test-results\extension-selected-sources-d7798-m-and-survive-popup-closure\error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results\extension-selected-sources-d7798-m-and-survive-popup-closure\trace.zip
+    Usage:
+
+        npx playwright show-trace test-results\extension-selected-sources-d7798-m-and-survive-popup-closure\trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests\e2e\extension.spec.ts:208:1 › selected sources extract, preview before send, stream and survive popup closure 
+  10 did not run
+  1 passed (12.0s)

@@ -1,0 +1,27 @@
+
+> sage-extension@0.1.1 test:e2e
+> playwright test
+
+
+Running 15 tests using 1 worker
+
+(node:2068) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  1 tests\e2e\extension.spec.ts:203:1 › popup and provider setup are real extension pages; no initial provider requests (714ms)
+  ok  2 tests\e2e\extension.spec.ts:226:1 › selected sources extract, preview before send, stream and survive popup closure (4.0s)
+  ok  3 tests\e2e\extension.spec.ts:282:1 › blocked domains, missing provider grants, fake citations and untrusted messages are denied (432ms)
+  ok  4 tests\e2e\extension.spec.ts:357:1 › history is opt-in, restoration works and cancellation preserves partial output (2.4s)
+  ok  5 tests\e2e\extension.spec.ts:396:1 › worker restart marks unfinished jobs interrupted (636ms)
+  ok  6 tests\e2e\extension.spec.ts:412:1 › local PDF extraction uses the bundled worker and preserves page references (1.8s)
+  ok  7 tests\e2e\extension.spec.ts:474:1 › skills can be created, found, edited, used and deleted; no remote asset traffic (1.5s)
+  ok  8 tests\e2e\extension.spec.ts:507:1 › workspace fallback, dark theme and corrupted-settings recovery (2.3s)
+  ok  9 tests\e2e\extension.spec.ts:544:1 › long-document processing requires plan consent, excludes passages and preserves provenance (11.2s)
+  ok 10 tests\e2e\extension.spec.ts:600:1 › failed long jobs require fresh retry consent and skip completed batches (10.3s)
+  ok 11 tests\e2e\extension.spec.ts:639:1 › DOCX upload, history rename, switching during generation, and Markdown export work (2.0s)
+  ok 12 tests\e2e\extension.spec.ts:712:1 › changing provider cancels the active request and preserves saved provider credentials (441ms)
+  ok 13 tests\e2e\extension.spec.ts:749:1 › three distinct sources retain identities, citations navigate and stale source navigation is refused (983ms)
+  ok 14 tests\e2e\extension.spec.ts:803:1 › model-specific contexts change planning and survive switching without changing citations (962ms)
+  -  15 tests\e2e\extension.spec.ts:869:1 › real local Phi-3 generation through the extension (opt-in)
+
+  1 skipped
+  14 passed (3.0m)

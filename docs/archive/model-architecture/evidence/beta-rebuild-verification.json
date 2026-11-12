@@ -1,0 +1,5 @@
+{
+  "sameEnvironmentRebuildIdentical": true,
+  "fileCount": 22,
+  "comparison": "Production files from independent npm run build compared with npm run zip archive files"
+}

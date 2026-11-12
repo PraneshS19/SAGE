@@ -1,0 +1,174 @@
+{
+  "testedAt": "2026-11-12T10:17:30.121Z",
+  "browser": "157.0.8103.50",
+  "productionManifestUnchanged": true,
+  "results": [
+    {
+      "name": "A normal webpage",
+      "model": "phi3:3.8b",
+      "status": "complete",
+      "output": "The Garden pilot, as reported in passage [sbd3fa3ba-p1-ae815b19-offset:0], successfully reduced water usage by 12% among 42 volunteers over six weeks. However, the pilot's lack of a randomized control group, as mentioned in the same source, limits the ability to generalize these results [sbd3fa3ba-p1-ae815b19-offset:0].",
+      "sources": [
+        {
+          "id": "sbd3fa3ba",
+          "kind": "page",
+          "metadata": {
+            "domain": "127.0.0.1",
+            "extractedAt": 1794478693505,
+            "language": "en",
+            "method": "readability",
+            "warnings": [],
+            "wordCount": 22
+          },
+          "passages": [
+            {
+              "id": "sbd3fa3ba-p1-ae815b19",
+              "offset": 0,
+              "text": "The pilot included 42 volunteers and reported 12% lower water use over six weeks. It did not use a randomized control group."
+            }
+          ],
+          "tabId": 246212198,
+          "title": "Garden pilot",
+          "url": "http://127.0.0.1:63172/pilot"
+        }
+      ],
+      "elapsedMs": 17671,
+      "firstTokenMs": 14954,
+      "promptTokens": 1191
+    },
+    {
+      "name": "A follow-up",
+      "model": "phi3:3.8b",
+      "status": "complete",
+      "output": "No, the pilot was not randomized, as it explicitly did not include a randomized control group [sbd3fa3ba-p1-ae815b19-offset:0].",
+      "sources": [
+        {
+          "id": "sbd3fa3ba",
+          "kind": "page",
+          "metadata": {
+            "domain": "127.0.0.1",
+            "extractedAt": 1794478693505,
+            "language": "en",
+            "method": "readability",
+            "warnings": [],
+            "wordCount": 22
+          },
+          "passages": [
+            {
+              "id": "sbd3fa3ba-p1-ae815b19",
+              "offset": 0,
+              "text": "The pilot included 42 volunteers and reported 12% lower water use over six weeks. It did not use a randomized control group."
+            }
+          ],
+          "tabId": 246212198,
+          "title": "Garden pilot",
+          "url": "http://127.0.0.1:63172/pilot"
+        }
+      ],
+      "elapsedMs": 10168,
+      "firstTokenMs": 2114,
+      "promptTokens": 1481
+    }
+  ],
+  "extensionRequests": [
+    {
+      "url": "http://127.0.0.1:11434/api/tags",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:11434/api/tags",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:11434/api/chat",
+      "method": "POST",
+      "model": "phi3:3.8b"
+    },
+    {
+      "url": "http://127.0.0.1:11434/api/tags",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:11434/api/chat",
+      "method": "POST",
+      "model": "phi3:3.8b"
+    },
+    {
+      "url": "http://127.0.0.1:11434/api/chat",
+      "method": "POST",
+      "model": "phi3:3.8b"
+    },
+    {
+      "url": "http://127.0.0.1:11434/api/chat",
+      "method": "POST",
+      "model": "phi3:3.8b"
+    },
+    {
+      "url": "http://127.0.0.1:11434/api/tags",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:11434/api/ps",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:11434/api/tags",
+      "method": "GET"
+    }
+  ],
+  "pageRequests": 1,
+  "origin": "chrome-extension://<test-extension-id>",
+  "models": [
+    "qwen2.5:3b",
+    "phi3:3.8b"
+  ],
+  "preloadMs": 5273,
+  "diagnostics": {
+    "ok": true,
+    "provider": "ollama",
+    "model": "phi3:3.8b",
+    "endpoint": "http://127.0.0.1:11434",
+    "connectionStatus": "Connected (HTTP 200 OK)",
+    "corsStatus": "Accepted (HTTP 200 OK)",
+    "modelStatus": "Installed and ready (phi3:3.8b)",
+    "inferenceStatus": "Passed (streaming response verified)",
+    "models": [
+      "qwen2.5:3b",
+      "phi3:3.8b"
+    ],
+    "steps": [
+      {
+        "name": "Server Reachability",
+        "status": "pass",
+        "message": "Connected to http://127.0.0.1:11434 (ollama)"
+      },
+      {
+        "name": "Browser Origin Acceptance",
+        "status": "pass",
+        "message": "Origin accepted by server (HTTP 200 OK)"
+      },
+      {
+        "name": "Available Models",
+        "status": "pass",
+        "message": "2 model(s) available: qwen2.5:3b, phi3:3.8b"
+      },
+      {
+        "name": "Selected Model",
+        "status": "pass",
+        "message": "Model 'phi3:3.8b' is available on the server"
+      },
+      {
+        "name": "Inference Test",
+        "status": "pass",
+        "message": "Minimal test prompt completed successfully"
+      },
+      {
+        "name": "Streaming Support",
+        "status": "pass",
+        "message": "Streaming verified (received tokens: \"OK\")"
+      }
+    ],
+    "summary": "All 6 checks passed! Connected to Ollama with model 'phi3:3.8b' and verified local streaming inference."
+  },
+  "failure": "expect(locator).toBeVisible() failed\n\nLocator: getByRole('dialog')\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n  - Expect \"toBeVisible\" getByRole('dialog') with timeout 5000ms\n  - waiting for getByRole('dialog')\n"
+}

@@ -1,0 +1,26 @@
+
+> sage-extension@0.1.1 test:e2e
+> playwright test
+
+
+Running 14 tests using 1 worker
+
+(node:20792) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok  1 tests\e2e\extension.spec.ts:200:1 › popup and provider setup are real extension pages; no initial provider requests (629ms)
+  ok  2 tests\e2e\extension.spec.ts:221:1 › selected sources extract, preview before send, stream and survive popup closure (10.2s)
+  ok  3 tests\e2e\extension.spec.ts:277:1 › blocked domains, missing provider grants, fake citations and untrusted messages are denied (193ms)
+  ok  4 tests\e2e\extension.spec.ts:352:1 › history is opt-in, restoration works and cancellation preserves partial output (1.3s)
+  ok  5 tests\e2e\extension.spec.ts:391:1 › worker restart marks unfinished jobs interrupted (188ms)
+  ok  6 tests\e2e\extension.spec.ts:407:1 › local PDF extraction uses the bundled worker and preserves page references (901ms)
+  ok  7 tests\e2e\extension.spec.ts:469:1 › skills can be created, found, edited, used and deleted; no remote asset traffic (629ms)
+  ok  8 tests\e2e\extension.spec.ts:502:1 › workspace fallback, dark theme and corrupted-settings recovery (977ms)
+  ok  9 tests\e2e\extension.spec.ts:539:1 › long-document processing requires plan consent, excludes passages and preserves provenance (10.6s)
+  ok 10 tests\e2e\extension.spec.ts:595:1 › failed long jobs require fresh retry consent and skip completed batches (10.1s)
+  ok 11 tests\e2e\extension.spec.ts:634:1 › DOCX upload, history rename, switching during generation, and Markdown export work (1.7s)
+  ok 12 tests\e2e\extension.spec.ts:706:1 › changing provider cancels the active request and preserves saved provider credentials (352ms)
+  ok 13 tests\e2e\extension.spec.ts:742:1 › three distinct sources retain identities, citations navigate and stale source navigation is refused (790ms)
+  -  14 tests\e2e\extension.spec.ts:796:1 › real local Phi-3 generation through the extension (opt-in)
+
+  1 skipped
+  13 passed (43.3s)

@@ -1,0 +1,19 @@
+{
+  "browser": "157.0.8103.50",
+  "origin": "chrome-extension://<test-extension-id>",
+  "models": ["qwen2.5:3b", "phi3:3.8b"],
+  "results": [
+    {
+      "model": "phi3:3.8b",
+      "status": "complete",
+      "output": "Original Passage:\n<s313cf659-p1-ae815b19>\n<p>The pilot included 42 volunteers and reported 12% lower water use over six weeks. It did not use a randomized control group.</p>\n\nSummary:\nThe pilot program, with 42 participants, resulted in a 12% reduction in water use over a six-week period without a randomized control group for comparison.\n\nLimitations:\nThe absence of a control group makes it difficult to attribute the reduction in water use soleledly to the pilot program.\n\nReference ID: s313cf659-p1-ae815b19",
+      "elapsedMs": 2850
+    },
+    {
+      "model": "qwen2.5:3b",
+      "status": "complete",
+      "output": "The pilot study reported a 12% reduction in water use among 42 volunteers over a six-week period but did not use a randomized control group, which limits the strength of the findings in terms of causal inference. [s313cf659-p1-ae815b19]",
+      "elapsedMs": 7992
+    }
+  ]
+}

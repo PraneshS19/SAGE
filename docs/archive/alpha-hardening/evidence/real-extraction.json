@@ -1,0 +1,50 @@
+{
+  "testedAt": "2026-11-09T19:26:58.501Z",
+  "method": "Fetched public HTML without authentication; JSDOM did not execute scripts or fetch subresources. This is extraction verification, not live browser DOM interaction.",
+  "results": [
+    {
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/AbortController",
+      "status": "PASS",
+      "title": "AbortController - Web APIs | MDN",
+      "characters": 2608,
+      "metadata": {
+        "domain": "developer.mozilla.org",
+        "language": "en-US",
+        "method": "readability",
+        "wordCount": 213,
+        "extractedAt": 1794252412105,
+        "warnings": []
+      },
+      "headings": 7
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Scientific_method",
+      "status": "PASS",
+      "title": "Scientific method - Wikipedia",
+      "characters": 277901,
+      "metadata": {
+        "domain": "en.wikipedia.org",
+        "language": "en",
+        "method": "readability",
+        "wordCount": 25343,
+        "extractedAt": 1794252416615,
+        "warnings": []
+      },
+      "headings": 53
+    },
+    {
+      "url": "https://www.rfc-editor.org/rfc/rfc8259.html",
+      "status": "PASS",
+      "title": "",
+      "characters": 33551,
+      "metadata": {
+        "domain": "www.rfc-editor.org",
+        "method": "readability",
+        "wordCount": 4132,
+        "extractedAt": 1794252418501,
+        "warnings": []
+      },
+      "headings": 0
+    }
+  ]
+}

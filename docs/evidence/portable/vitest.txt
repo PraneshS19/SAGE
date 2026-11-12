@@ -1,0 +1,13 @@
+
+> sage-extension@0.1.2 test
+> vitest run
+
+
+ RUN  v5.1.0 <local-workspace>
+
+
+ Test Files  12 passed | 2 skipped (14)
+      Tests  110 passed | 2 skipped (112)
+   Start at  16:35:38
+   Duration  15.84s (import 82%, tests 16%, transform 1%)
+

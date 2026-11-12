@@ -1,0 +1,7 @@
+src/entrypoints/background.ts 345ms
+tests/e2e/extension.spec.ts 246ms
+scripts/helium-workflows.mjs 85ms
+scripts/helium-native.mjs 8ms
+scripts/helium-diagnose.mjs 15ms
+scripts/helium-real-acceptance.mjs 18ms
+scripts/ollama-recovery.mjs 11ms

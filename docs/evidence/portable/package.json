@@ -1,0 +1,31 @@
+{
+  "version": "0.1.2",
+  "sha256": "019d775ef44db2d0d51a66a0aa3c90918df20f517042f8deeb0b397665ce598c",
+  "bytes": 797535,
+  "runtimeFiles": [
+    "LICENSE",
+    "NOTICE",
+    "THIRD_PARTY_NOTICES.txt",
+    "assets/App-D-liFg57.css",
+    "assets/pdf.worker.min-CIqJB0yW.mjs",
+    "background.js",
+    "chunks/App-D3UHieaZ.js",
+    "chunks/Markdown-YjEB0dDi.js",
+    "chunks/docx-6wjkjp7e.js",
+    "chunks/options-eDOWuCXW.js",
+    "chunks/pdf-NkrR2AUw.js",
+    "chunks/popup-BWc7iyZr.js",
+    "chunks/sidepanel-DelLDL7n.js",
+    "extract.js",
+    "icons/128.png",
+    "icons/16.png",
+    "icons/32.png",
+    "icons/48.png",
+    "manifest.json",
+    "options.html",
+    "popup.html",
+    "sidepanel.html"
+  ],
+  "checksumsVerified": 28,
+  "identicalToCleanNpmCiBuild": true
+}

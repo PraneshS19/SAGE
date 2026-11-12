@@ -1,0 +1,8 @@
+{
+  "testedAt": "2026-11-09T19:20:02.725Z",
+  "model": "phi3:3.8b",
+  "endpoint": "http://localhost:11434",
+  "elapsedMs": 4668,
+  "output": "SAGE is a browser extension that connects to a local inference server and disables history by default.",
+  "done": true
+}

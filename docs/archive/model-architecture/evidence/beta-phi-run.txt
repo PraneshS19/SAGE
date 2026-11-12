@@ -1,0 +1,9 @@
+
+ RUN  v5.1.0 <local-workspace>
+
+
+ Test Files  1 passed (1)
+      Tests  1 passed (1)
+   Start at  22:40:34
+   Duration  55.50s (tests 94%, import 6%)
+

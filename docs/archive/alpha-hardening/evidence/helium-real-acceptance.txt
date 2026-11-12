@@ -1,0 +1,6 @@
+WAITING FOR LOCALHOST PERMISSION chrome-extension://<test-extension-id>
+CONNECTED
+RESULTS [
+  { model: 'phi3:3.8b', status: 'complete', elapsedMs: 2850 },
+  { model: 'qwen2.5:3b', status: 'complete', elapsedMs: 7992 }
+]

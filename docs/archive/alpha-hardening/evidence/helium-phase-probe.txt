@@ -1,0 +1,18 @@
+0 request /article
+0 PASS Navigation probe
+0 request /favicon.ico
+1 request /article
+1 PASS Navigation probe
+1 request /favicon.ico
+2 request /article
+2 PASS Navigation probe
+2 request /favicon.ico
+3 request /api/tags
+3 request /article
+3 PASS Navigation probe
+3 request /favicon.ico
+4 request /api/tags
+4 FAIL page.goto: net::ERR_ABORTED at http://127.0.0.1:54861/article
+Call log:
+[2m  - navigating to "http://127.0.0.1:54861/article", waiting until "load"[22m
+

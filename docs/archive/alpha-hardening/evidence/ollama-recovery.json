@@ -1,0 +1,23 @@
+{
+  "down": {
+    "ok": false,
+    "provider": "ollama",
+    "model": "phi3:3.8b",
+    "endpoint": "http://127.0.0.1:11434",
+    "connectionStatus": "Unreachable / Server down",
+    "corsStatus": "Cannot reach server",
+    "modelStatus": "Unknown",
+    "inferenceStatus": "Skipped",
+    "models": [],
+    "steps": [
+      {
+        "name": "Server Reachability",
+        "status": "fail",
+        "message": "Cannot reach Ollama at http://127.0.0.1:11434. Ollama is not running. Start Ollama ('ollama serve' or open the Ollama desktop app)."
+      }
+    ],
+    "summary": "Cannot reach Ollama at http://127.0.0.1:11434. Ollama is not running. Start Ollama ('ollama serve' or open the Ollama desktop app)."
+  },
+  "recoveredModels": ["qwen2.5:3b", "phi3:3.8b"],
+  "sameExtension": true
+}

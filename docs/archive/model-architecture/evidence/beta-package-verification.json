@@ -1,0 +1,19 @@
+{
+  "version": "0.1.1",
+  "archive": ".output\\sage-extension-0.1.1-chrome.zip",
+  "sha256": "37189a9fc1ab36f7397805c00be2ab9d5ce327403b5875680164cb4b738b2570",
+  "bytes": 769545,
+  "fileCount": 22,
+  "allArchiveFilesMatchBuild": true,
+  "defaultHostGrants": [],
+  "requiredPermissions": [
+    "activeTab",
+    "scripting",
+    "storage",
+    "contextMenus",
+    "sidePanel"
+  ],
+  "optionalPermissions": [
+    "tabs"
+  ]
+}

@@ -1,0 +1,2 @@
+src/entrypoints/background.ts 277ms
+src/lib/processing.ts 60ms (unchanged)

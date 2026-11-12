@@ -1,0 +1,9 @@
+PASS [
+  { name: 'A normal webpage', status: 'error', ms: 15709 },
+  { name: 'A follow-up', status: 'complete', ms: 3702 },
+  { name: 'F model switch', status: 'complete', ms: 10911 },
+  { name: 'C DOCX summary', status: 'complete', ms: 3721 },
+  { name: 'C DOCX question', status: 'complete', ms: 2676 },
+  { name: 'D PDF summary', status: 'complete', ms: 3663 },
+  { name: 'E multi-tab comparison', status: 'complete', ms: 4768 }
+]
