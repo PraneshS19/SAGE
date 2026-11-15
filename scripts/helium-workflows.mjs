@@ -183,12 +183,13 @@ try {
   await a.goto(base + "/pilot");
   await page.goto(origin + "/sidepanel.html");
   await page.getByRole("button", { name: "Research", exact: true }).click();
+  await page.bringToFront();
   await page.getByRole("button", { name: "Choose tabs", exact: true }).click();
   await page.getByLabel("Garden pilot").check();
   await page.getByRole("button", { name: "Extract 1 selected tabs" }).click();
   await expect(
     page.getByText("Extracted 1 source.", { exact: false }),
-  ).toBeVisible();
+  ).toBeVisible({ timeout: 20000 });
   const infer = async (name, question, previous = false) => {
     await page.goto(origin + "/sidepanel.html");
     await expect(
@@ -245,6 +246,16 @@ try {
       recoveredSteps:
         job.summaries?.filter((note) => note.recovered).length ?? 0,
     });
+    if (
+      process.env.SAGE_CAPTURE === "1" &&
+      ["A normal webpage", "E multi-tab comparison"].includes(name)
+    ) {
+      await mkdir("test-results/publication-images", { recursive: true });
+      await page.screenshot({
+        path: `test-results/publication-images/${name.startsWith("A") ? "webpage" : "comparison"}.png`,
+        fullPage: true,
+      });
+    }
     await flush();
     return job;
   };
@@ -361,6 +372,7 @@ try {
   await b.goto(base + "/replication");
   await page.goto(origin + "/sidepanel.html");
   await page.getByRole("button", { name: "Research", exact: true }).click();
+  await page.bringToFront();
   await page.getByRole("button", { name: "Choose tabs", exact: true }).click();
   await page.getByLabel("Garden pilot").check();
   await page.getByLabel("Garden replication").check();

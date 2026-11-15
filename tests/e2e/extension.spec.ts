@@ -221,6 +221,10 @@ test("popup and provider setup are real extension pages; no initial provider req
   ui = onboarding;
   await ui.bringToFront();
   await ui.getByRole("button", { name: "Get Started", exact: true }).click();
+  if (process.env.SAGE_CAPTURE === "1")
+    await ui.screenshot({
+      path: "test-results/publication-images/onboarding.png",
+    });
   await ui
     .getByRole("button", { name: "Set up Cloud AI", exact: true })
     .click();
@@ -264,6 +268,11 @@ test("popup and provider setup are real extension pages; no initial provider req
     })
     .click();
   await expect(ui.locator(".notice[role=status]")).toContainText("Connected.");
+  if (process.env.SAGE_CAPTURE === "1") {
+    const models = ui.getByLabel("Discovered models", { exact: true });
+    await models.scrollIntoViewIfNeeded();
+    await ui.screenshot({ path: "test-results/publication-images/models.png" });
+  }
   await ui
     .getByLabel("Discovered models", { exact: true })
     .selectOption("fixture-chat");
@@ -272,6 +281,14 @@ test("popup and provider setup are real extension pages; no initial provider req
     "Settings saved",
   );
   const configured = await rpc<State>(ui, { type: "state" });
+  if (process.env.SAGE_CAPTURE === "1") {
+    await ui
+      .getByRole("button", { name: "Privacy and Permissions", exact: true })
+      .click();
+    await ui.screenshot({
+      path: "test-results/publication-images/privacy.png",
+    });
+  }
   await rpc(ui, {
     type: "settings",
     settings: { ...configured.settings, onboarded: true },
@@ -685,7 +702,20 @@ test("failed long jobs require fresh retry consent and skip completed batches", 
   await context.close();
   context = await launchBrowser();
   ui = await context.newPage();
-  await ui.goto(extension + "/sidepanel.html");
+  const workspaceUrl = extension + "/sidepanel.html";
+  try {
+    await ui.goto(workspaceUrl);
+  } catch (error) {
+    if (
+      !(error instanceof Error) ||
+      !error.message.includes("interrupted by another navigation to") ||
+      !error.message.includes(extension + "/options.html")
+    )
+      throw error;
+    // Unpacked startup can open Options before the new workspace settles.
+    await ui.waitForURL(extension + "/options.html");
+    await ui.goto(workspaceUrl);
+  }
   const reopened = await rpc<State>(ui, { type: "state" });
   expect(reopened.job?.status).toBe("interrupted");
   expect(reopened.job?.summaries).toEqual(failed.summaries);

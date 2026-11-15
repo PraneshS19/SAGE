@@ -1,0 +1,5 @@
+# Keep packaged text byte-stable across Git checkout settings.
+/src/entrypoints/**/index.html text eol=lf
+/public/LICENSE text eol=lf
+/public/NOTICE text eol=lf
+/public/THIRD_PARTY_NOTICES.txt text eol=lf

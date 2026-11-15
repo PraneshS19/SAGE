@@ -1,7 +1,9 @@
 name: SAGE checks
 on:
   push:
+    branches: [main]
   pull_request:
+    branches: [main]
 permissions:
   contents: read
 jobs:
@@ -9,6 +11,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
       - uses: actions/setup-node@v4
         with:
           node-version: 24
@@ -22,6 +26,7 @@ jobs:
       - run: npm run test:e2e
       - run: npm audit --audit-level=moderate
       - run: npm run verify:release
+      - run: node scripts/check-publication.mjs
       - uses: actions/upload-artifact@v4
         with:
           name: sage-chromium
@@ -30,4 +35,4 @@ jobs:
         if: failure()
         with:
           name: browser-test-results
-          path: test-results
+          path: test-results/playwright/

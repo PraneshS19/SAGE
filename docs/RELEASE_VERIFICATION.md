@@ -60,5 +60,19 @@ Release scripts are available locally and configured in GitHub Actions. CI was n
 - The versioned ZIP contains 22 runtime files. All 28 distribution checksums verified. An independent build using the locked dependency installation produced identical ZIP bytes. The 0.1.2 ZIP still matches its published local checksum. [Package record](evidence/reliability/package.json)
 - The live test sampled a 5.6-second preload, 15,534,384 bytes of renderer heap in use, and JSON string lengths of 44,842 local and 4,061 session characters. The separate fixture startup sample was 624 ms. These are single samples. Extraction latency, peak memory and cross-device performance were not isolated.
 
-ZIP: `dist/SAGE-0.1.3/sage-extension-0.1.3.zip`  
+ZIP: `dist/SAGE-0.1.3/sage-extension-0.1.3.zip`
+
 SHA-256: `525d4c74803620643ecb4c2ecd3885dcd20c47a431370e10845fcd963cf9633e`
+
+## Public-copy verification
+
+The public copy uses GitHub noreply metadata, retains two development commits, and omits workstation-specific evidence listed in the [cleanup inventory](PUBLICATION_INVENTORY.md). The original repository and release use a separate local history. The public checkout pins runtime HTML and notices to LF for consistent packaging across Git checkout settings.
+
+- On Windows, a locked install, TypeScript, ESLint and the fixture suites passed. Vitest recorded 113 passing tests and two opt-in suites skipped. Sandboxed Helium, Edge and Brave each passed all 14 controlled browser tests and skipped their opt-in live test. The fixtures include 4K, 32K and 128K context planning, citation consistency on model switches, and review of bounded long-document jobs.
+- The extracted production ZIP ran seven live Ollama requests in Helium with Phi-3 and Qwen. The workflow covered webpage extraction and follow-up, model switching, DOCX, text PDF, tab comparison, cloud review cancellation, and history restoration across a browser restart. It recovered after restarting an isolated Ollama process and observed zero nonlocal extension requests. A separate Helium extension-manager reload, using an unpacked install of the final ZIP in a disposable profile, preserved synthetic local data.
+- The comparison screenshot shows an answer with no valid citations. SAGE marked support unverified. Citation matching identifies a passage, and factual support still requires review.
+- The release verifier checked 22 runtime files. All 28 distribution checksums matched. An independent clean checkout reproduced the same ZIP byte for byte. npm audit reported zero known vulnerabilities at verification time.
+
+Public-copy ZIP SHA-256: `ae59a505042e9dbd6d8c566eb33fc13882ea339a6546014ece228d6cdc396f33`.
+
+Publishing, hosted CI and release downloads require the separately authorized GitHub step. Live OpenRouter, GPT-OSS 120B, macOS and Linux remain unverified for this milestone.

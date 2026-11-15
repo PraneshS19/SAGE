@@ -1,11 +1,7 @@
 # Contributing to SAGE
 
-Use Node.js 22.16+ or 24 LTS and `npm ci`. Keep strict TypeScript, minimal dependencies and the local-first privacy boundary intact.
+Read the [development guide](docs/DEVELOPMENT.md) and use Node.js 24 with `npm ci`. Describe the behavior you want to improve and provide a minimal synthetic reproduction. Follow the [security policy](SECURITY.md) for vulnerabilities.
 
-Before submitting changes, run `npm run typecheck`, `npm run lint`, `npm test`, `npm run build` and the applicable Playwright tests. Add tests for changed security or provider behavior. Use controlled fixtures for deterministic tests; never present fixture output as actual model behavior.
+For a pull request, run `npm run typecheck`, `npm run lint`, `npm test`, `npm run release` and applicable browser tests. State what you ran and distinguish controlled-provider results from live inference. Add targeted tests for permission, storage and provider changes. Document changes to network destinations or retention.
 
-Do not add telemetry, remote executable code, automatic cloud fallback, hidden content collection or broad installation-time host grants. No secrets or real private webpage content belong in commits, screenshots, traces or issue reports.
-
-Document new permissions, network destinations, retention behavior and browser limits. Check UI with keyboard navigation and both themes. Verify a clean build artifact and inspect the generated manifest before proposing release.
-
-Changes are proposed under the repository’s Apache-2.0 license. Review dependency licenses before introducing new packages. Maintainer identity, public repository URL, release signing and security-contact policy must be established before public publication.
+Keep telemetry and automatic cloud fallback out of the extension. Use public or synthetic data in tests and evidence. Contributions use the repository's [Apache-2.0 license](LICENSE). Review notices before introducing a dependency.

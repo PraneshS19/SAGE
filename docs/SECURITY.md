@@ -1,19 +1,19 @@
 # Security model and review notes
 
-SAGE treats webpage, PDF, transcript and model text as untrusted data. Never include credentials in an issue report. For a suspected vulnerability, provide a minimal nonsensitive reproduction privately to the repository maintainer once a public repository and reporting channel are established; no security contact has been invented for this local project.
+SAGE treats webpage, PDF, transcript and model text as untrusted data. See the [security policy](../SECURITY.md) for private reporting guidance.
 
 ## Implemented controls
 
 - No remote scripts, CDN UI, injected AI tools, telemetry or automatic model downloads.
 - MV3 CSP restricts executable code and objects to the extension. PDF worker is bundled locally.
-- React Markdown escapes text, skips raw HTML, strips executable URL protocols, suppresses all image rendering and opens allowed HTTP(S) links with `noopener noreferrer`.
+- React Markdown escapes text, skips raw HTML, strips executable URL protocols, suppresses all image rendering and renders model-generated links as inert text and opens source links through trusted source navigation.
 - Background verifies sender ID and allowlisted extension-page URL, then validates request shape with Zod. Extracted page scripts cannot send privileged commands.
 - API keys never go to injected scripts or exported history. Storage access is restricted to trusted extension contexts.
 - Endpoints reject credentials, query strings, fragments, non-HTTP(S) protocols, wildcard addresses and the common metadata address. Nonprivate remote HTTP is rejected. Redirects are forbidden on provider requests, preventing authorization forwarding.
 - Page policy is checked before injection, after extraction and before generation. Navigation races invalidate extraction.
 - Drafts expire, are tied to provider configuration, and are consumed on explicit confirmation. New configuration invalidates pending drafts.
 - Source data is JSON-encoded under a fixed system message. No tool execution or privilege expansion is available to the model.
-- Missing stream termination is an error. Provider output limits add a visible warning; truncated intermediate notes stop synthesis. Cancellation uses AbortController; available partial output remains inspectable.
+- Missing stream termination is an error. Provider output limits add a visible warning; bounded exact-source recovery can replace truncated intermediate notes. Cancellation uses AbortController; available partial output remains inspectable.
 - Incognito is disabled and private source tabs are rejected.
 
 ## Important limits
