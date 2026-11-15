@@ -23,6 +23,20 @@ jobs:
       - run: npm test
       - run: npm run build
       - run: npx playwright install --with-deps chromium
+      - name: Allow Playwright Chromium to start its sandbox
+        shell: bash
+        run: |
+          if [[ "$(cat /proc/sys/kernel/apparmor_restrict_unprivileged_userns 2>/dev/null || echo 0)" != 1 ]]; then
+            exit 0
+          fi
+          browser="$(node --input-type=module -e 'import { chromium } from "@playwright/test"; console.log(chromium.executablePath())')"
+          test -x "$browser"
+          sudo apparmor_parser -r <<EOF
+          abi <abi/4.0>,
+          profile sage-playwright-chromium "$browser" flags=(unconfined) {
+            userns,
+          }
+          EOF
       - run: npm run test:e2e
       - run: npm audit --audit-level=moderate
       - run: npm run verify:release
