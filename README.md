@@ -27,15 +27,17 @@ See the [feature matrix](docs/FEATURE_MATRIX.md) for verification scope.
 
 ## Screenshots
 
-The captures use a dedicated test profile and synthetic research sources.
+Captured from the packaged extension with synthetic sources.
 
-| In-browser workspace                                                              | Webpage summary                                                         | Multi-tab comparison                                                             |
-| --------------------------------------------------------------------------------- | ----------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| ![SAGE popup with a document and its sources](docs/screenshots/popup-fixture.png) | ![SAGE summarizing a webpage](docs/screenshots/publication/webpage.png) | ![SAGE comparing two selected tabs](docs/screenshots/publication/comparison.png) |
+| Popup                                                                                   | Research workspace                                                                      | Dark theme                                                                        |
+| --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| ![Compact popup with an answer and its sources](docs/screenshots/publication/popup.png) | ![Workspace showing a two-source comparison](docs/screenshots/publication/research.png) | ![Dark popup with local PDF context](docs/screenshots/publication/popup-dark.png) |
 
-| Provider onboarding                                                                    | Model selection                                                                        | Privacy settings                                                                  |
-| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
-| ![Local and cloud provider setup options](docs/screenshots/publication/onboarding.png) | ![Local model discovery and context settings](docs/screenshots/publication/models.png) | ![Permission controls in SAGE settings](docs/screenshots/publication/privacy.png) |
+| Onboarding                                                                    | Model setup                                                                      | Cloud request review                                                                           |
+| ----------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| ![Local and cloud setup choices](docs/screenshots/publication/onboarding.png) | ![Model discovery and manual selection](docs/screenshots/publication/models.png) | ![Cloud request review on a narrow side panel](docs/screenshots/publication/cloud-consent.png) |
+
+See the [product audit and screenshot gallery](docs/PRODUCT_AUDIT.md) for privacy settings, history, error recovery, and a long-answer rendering fixture.
 
 ## How SAGE works
 

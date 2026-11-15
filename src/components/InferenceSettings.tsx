@@ -32,6 +32,19 @@ export function InferenceSettings({
         runtime allocation. Save after editing. Blank numeric fields use
         proportional, model-independent defaults.
       </p>
+      <label>
+        Context window (tokens)
+        <input
+          type="number"
+          min={2048}
+          max={Number.MAX_SAFE_INTEGER}
+          step={1024}
+          value={provider.contextWindow}
+          onChange={(event) =>
+            update({ contextWindow: Number(event.target.value) })
+          }
+        />
+      </label>
       <button
         type="button"
         disabled={loading || !provider.model}

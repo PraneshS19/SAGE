@@ -40,7 +40,7 @@ Every generation requires review and confirmation of an expiring draft. The insp
 
 Long-content opt-in approves a bounded sequence, counts, token ceilings and selected sources. Later requests contain derived notes whose exact contents cannot be known before execution; the inspector discloses this. Notes/provenance are stored with the job and optional history. No automatic retries or additional requests are added. Cancellation cannot retract completed transmissions.
 
-Model refresh is explicit and does not generate text. Explicit Test Connection can send a minimal five-token inference request; nonlocal endpoints require separate confirmation showing possible cost. Canonical OpenRouter diagnostics can request key/account metadata. Diagnostics include no page text. Corrupt saved history is quarantined locally and cleared by Reset all.
+Model refresh is explicit and does not generate text. **Test model inference** can send a minimal five-token inference request; nonlocal endpoints require separate confirmation showing possible cost. Canonical OpenRouter diagnostics can request key/account metadata. Diagnostics include no page text. Corrupt saved history is quarantined locally and cleared by Reset all.
 
 ## Permissions
 

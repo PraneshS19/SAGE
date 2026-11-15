@@ -1,21 +1,24 @@
-import { useEffect, useRef, type ReactNode } from "react";
+import { useEffect, useRef, type ReactNode, type RefObject } from "react";
 export function Dialog({
   children,
   onClose,
+  returnFocus,
 }: {
   children: ReactNode;
   onClose: () => void;
+  returnFocus: RefObject<HTMLElement | null>;
 }) {
   const ref = useRef<HTMLDialogElement>(null);
   useEffect(() => {
-    const previous = document.activeElement;
+    const previous = returnFocus.current;
     const dialog = ref.current;
     dialog?.showModal();
+    dialog?.querySelector<HTMLElement>("#inspector-title")?.focus();
     return () => {
       dialog?.close();
-      if (previous instanceof HTMLElement) previous.focus();
+      if (previous?.isConnected) previous.focus();
     };
-  }, []);
+  }, [returnFocus]);
   return (
     <dialog
       ref={ref}

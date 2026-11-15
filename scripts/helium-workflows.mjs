@@ -48,7 +48,7 @@ const evidence = {
 };
 const flush = () =>
   writeFile(
-    process.env.SAGE_WORKFLOW_REPORT || "docs/helium-workflows.json",
+    process.env.SAGE_WORKFLOW_REPORT || "test-results/helium-workflows.json",
     JSON.stringify(evidence, null, 2),
   );
 context.on("request", (request) => {
@@ -105,8 +105,12 @@ try {
     }
   }
   if (process.env.SAGE_OLLAMA_EXE) await startTemporaryOllama();
-  page = await context.newPage();
-  await page.goto(origin + "/options.html");
+  const onboardingUrl = origin + "/options.html";
+  await expect
+    .poll(() => context.pages().some((tab) => tab.url() === onboardingUrl))
+    .toBe(true);
+  page = context.pages().find((tab) => tab.url() === onboardingUrl);
+  await page.bringToFront();
   await page.getByRole("button", { name: "Get Started", exact: true }).click();
   await page
     .getByRole("button", { name: "Set up Local AI", exact: true })
@@ -268,6 +272,7 @@ try {
     "Was this randomized? Answer in one sentence with a citation.",
     true,
   );
+  await page.locator(".model-options summary").click();
   await page
     .getByRole("button", { name: "Refresh models", exact: true })
     .click();
@@ -428,7 +433,7 @@ try {
   await page.screenshot({
     path:
       process.env.SAGE_WORKFLOW_SCREENSHOT ||
-      "docs/screenshots/helium-real-workspace.png",
+      "test-results/helium-real-workspace.png",
     fullPage: true,
   });
   evidence.storageBytes = await page.evaluate(async () => ({

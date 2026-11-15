@@ -182,7 +182,7 @@ test.beforeAll(async () => {
   const started = Date.now();
   await ui.goto(extension + "/popup.html");
   await expect(
-    ui.getByRole("heading", { name: "Understand what matters." }),
+    ui.getByRole("heading", { name: "Page workspace" }),
   ).toBeVisible();
   await mkdir("docs", { recursive: true });
   await writeFile(
@@ -210,7 +210,7 @@ test.afterAll(async () => {
 test.describe.configure({ mode: "serial" });
 test("popup and provider setup are real extension pages; no initial provider requests", async () => {
   await expect(
-    ui.getByRole("heading", { name: "Understand what matters." }),
+    ui.getByRole("heading", { name: "Page workspace" }),
   ).toBeVisible();
   expect(sends).toBe(0);
   const onboarding = context
@@ -252,6 +252,8 @@ test("popup and provider setup are real extension pages; no initial provider req
   await expect(ui.locator(".notice[role=status]")).toContainText(
     "Cannot reach Ollama",
   );
+  if (process.env.SAGE_CAPTURE === "1")
+    await ui.screenshot({ path: "test-results/publication-images/error.png" });
   await ui.getByLabel("Endpoint", { exact: true }).fill(base);
   emptyModels = true;
   try {
@@ -332,10 +334,9 @@ test("selected sources extract, preview before send, stream and survive popup cl
   await expect(ui.getByLabel("AI response").locator(".markdown")).toContainText(
     "The small sample limits generalization.",
   );
-  await expect(ui.getByText("COMPLETE · SAGE")).toBeVisible();
+  await expect(ui.getByText("COMPLETE", { exact: true })).toBeVisible();
   expect(payload).toContain("untrusted data");
-  await mkdir("docs/screenshots", { recursive: true });
-  await ui.setViewportSize({ width: 430, height: 980 });
+  await ui.setViewportSize({ width: 360, height: 850 });
   await ui.screenshot({
     path: "test-results/reliability-screenshots/popup-fixture.png",
     fullPage: true,
@@ -345,6 +346,7 @@ test("selected sources extract, preview before send, stream and survive popup cl
   await expect(ui.getByLabel("AI response").locator(".markdown")).toContainText(
     "The small sample limits generalization.",
   );
+  await ui.getByRole("button", { name: "Research", exact: true }).click();
   await ui.screenshot({
     path: "test-results/reliability-screenshots/workspace-fixture.png",
     fullPage: true,
@@ -594,10 +596,13 @@ test("workspace fallback, dark theme and corrupted-settings recovery", async () 
   await fallback.close();
   await ui.getByRole("button", { name: "Toggle theme" }).click();
   await expect(ui.locator("html")).toHaveAttribute("data-theme", "dark");
+  const viewport = ui.viewportSize();
+  await ui.setViewportSize({ width: 360, height: 620 });
   await ui.screenshot({
     path: "test-results/reliability-screenshots/popup-dark-fixture.png",
     fullPage: true,
   });
+  if (viewport) await ui.setViewportSize(viewport);
   await ui.evaluate(async () => {
     await chrome.storage.local.set({ settings: { version: 999 } });
   });
@@ -606,7 +611,7 @@ test("workspace fallback, dark theme and corrupted-settings recovery", async () 
   ui.once("dialog", (dialog) => dialog.accept());
   await ui.getByRole("button", { name: "Reset SAGE data" }).click();
   await expect(
-    ui.getByRole("heading", { name: "Understand what matters." }),
+    ui.getByRole("heading", { name: "Page workspace" }),
   ).toBeVisible();
   expect((await rpc<State>(ui, { type: "state" })).settings.history).toBe(
     false,
@@ -634,6 +639,7 @@ test("long-document processing requires plan consent, excludes passages and pres
   const sourceTab = tabs.find((t) => t.url === base + "/corpus/long")!;
   await rpc(ui, { type: "extract", tabIds: [sourceTab.id] });
   await ui.goto(extension + "/sidepanel.html");
+  await ui.getByText("Processing options", { exact: true }).click();
   await ui
     .getByLabel(
       "Process oversized context in batches (review request count first)",
@@ -970,6 +976,102 @@ test("model-specific contexts change planning and survive switching without chan
   }
 });
 
+test("refined surfaces fit narrow widths and model discovery remains explicit", async () => {
+  const original = await rpc<State>(ui, { type: "state" });
+  await rpc(ui, {
+    type: "settings",
+    settings: {
+      ...original.settings,
+      provider: {
+        ...original.settings.provider,
+        kind: "ollama",
+        endpoint: base,
+        model: "fixture-chat",
+      },
+    },
+  });
+  const fixturePage = await context.newPage();
+  await fixturePage.goto(base + "/corpus/pilot");
+  const fixtureTabs = await rpc<{ id: number; url: string }[]>(ui, {
+    type: "tabs",
+  });
+  const fixtureTab = fixtureTabs.find(
+    (tab) => tab.url === base + "/corpus/pilot",
+  );
+  expect(fixtureTab).toBeDefined();
+  await rpc(ui, { type: "extract", tabIds: [fixtureTab!.id] });
+  const hasOverflow = () =>
+    ui.evaluate(() => document.documentElement.scrollWidth > window.innerWidth);
+  for (const surface of ["popup", "sidepanel", "options"]) {
+    await ui.setViewportSize({ width: 320, height: 720 });
+    await ui.goto(extension + "/" + surface + ".html");
+    await expect(ui.getByRole("heading", { level: 1 })).toBeVisible();
+    expect(await hasOverflow()).toBe(false);
+  }
+  await ui.goto(extension + "/sidepanel.html");
+  await ui.locator(".model-options summary").focus();
+  await ui.keyboard.press("Enter");
+  const refresh = ui.getByRole("button", { name: "Refresh models" });
+  await expect(refresh).toBeVisible();
+  await refresh.click();
+  await expect(
+    ui.getByRole("combobox", { name: "Select AI Model" }).locator("option"),
+  ).toHaveCount(2);
+  const sendsBefore = sends;
+  await ui
+    .getByRole("combobox", { name: "Select AI Model" })
+    .selectOption("fixture-second");
+  await expect
+    .poll(
+      async () =>
+        (await rpc<State>(ui, { type: "state" })).settings.provider.model,
+    )
+    .toBe("fixture-second");
+  expect(sends).toBe(sendsBefore);
+  expect(await hasOverflow()).toBe(false);
+  await ui.locator(".model-options summary").click();
+  await ui.getByRole("button", { name: "History", exact: true }).click();
+  if (process.env.SAGE_CAPTURE === "1")
+    await ui.screenshot({
+      path: "test-results/publication-images/history.png",
+      fullPage: true,
+    });
+  await ui.getByRole("button", { name: "Page", exact: true }).click();
+  await rpc(ui, {
+    type: "settings",
+    settings: {
+      ...original.settings,
+      provider: {
+        ...original.settings.provider,
+        kind: "openrouter",
+        endpoint: "https://openrouter.ai/api/v1",
+        model: "fixture-cloud",
+      },
+    },
+  });
+  await ui.reload();
+  await ui
+    .getByRole("textbox", { name: "Ask about your sources" })
+    .fill("Compare the selected evidence.");
+  await ui.getByRole("button", { name: "Review and send question" }).click();
+  const dialog = ui.getByRole("dialog");
+  await expect(dialog).toContainText("This content will leave your device");
+  await expect(dialog.getByRole("heading")).toBeFocused();
+  await expect(dialog).toContainText("https://openrouter.ai/api/v1");
+  expect(await hasOverflow()).toBe(false);
+  if (process.env.SAGE_CAPTURE === "1")
+    await ui.screenshot({
+      path: "test-results/publication-images/cloud-consent.png",
+    });
+  await ui.keyboard.press("Escape");
+  await expect(dialog).toHaveCount(0);
+  await expect(
+    ui.getByRole("button", { name: "Review and send question" }),
+  ).toBeFocused();
+  expect(sends).toBe(sendsBefore);
+  expect(nonLocalRequests).toEqual([]);
+  await rpc(ui, { type: "settings", settings: original.settings });
+});
 test("real local Phi-3 generation through the extension (opt-in)", async () => {
   test.skip(
     process.env.SAGE_REAL_OLLAMA !== "1",

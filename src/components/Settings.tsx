@@ -10,7 +10,6 @@ import {
 } from "../lib/schema";
 import { endpointInfo } from "../lib/security";
 import { rpc, openWorkspace } from "../lib/client";
-import { ModelSelector } from "./ModelSelector";
 const endpoints: Record<Provider["kind"], string> = {
   ollama: "http://127.0.0.1:11434",
   lmstudio: "http://127.0.0.1:1234/v1",
@@ -145,10 +144,14 @@ export function SettingsView({
         ))}
       </aside>
       <section className="settings-content">
-        <div className="eyebrow">MAKE SAGE YOURS</div>
         <h1>{section}</h1>
         {message && (
-          <p className="notice" role="status">
+          <p
+            className={
+              report && !report.ok ? "notice provider-warning" : "notice"
+            }
+            role="status"
+          >
             {message}
           </p>
         )}
@@ -173,24 +176,28 @@ export function SettingsView({
               </button>
             ) : (
               <div className="onboarding">
-                <h3>Local AI</h3>
-                <p>
-                  Run a model on your computer. Install and start a local
-                  server, then install a compatible chat model. Once set up,
-                  local inference can work offline.
-                </p>
-                <button onClick={() => chooseProvider("ollama")}>
-                  Set up Local AI
-                </button>
-                <h3>Cloud AI</h3>
-                <p>
-                  Connect with your own API key. Your selected prompt and
-                  sources go to the provider after review. Internet access is
-                  required and usage charges or limits may apply.
-                </p>
-                <button onClick={() => chooseProvider("openrouter")}>
-                  Set up Cloud AI
-                </button>
+                <section className="card">
+                  <h3>Local AI</h3>
+                  <p>
+                    Run a model on your computer. Install and start a local
+                    server, then install a compatible chat model. Once set up,
+                    local inference can work offline.
+                  </p>
+                  <button onClick={() => chooseProvider("ollama")}>
+                    Set up Local AI
+                  </button>
+                </section>
+                <section className="card">
+                  <h3>Cloud AI</h3>
+                  <p>
+                    Connect with your own API key. Your selected prompt and
+                    sources go to the provider after review. Internet access is
+                    required and usage charges or limits may apply.
+                  </p>
+                  <button onClick={() => chooseProvider("openrouter")}>
+                    Set up Cloud AI
+                  </button>
+                </section>
               </div>
             )}
           </>
@@ -244,15 +251,7 @@ export function SettingsView({
               hardware vault. Never included in page scripts or exported
               history.
             </p>
-            <div
-              className="button-row"
-              style={{
-                display: "flex",
-                gap: "8px",
-                flexWrap: "wrap",
-                marginBottom: "8px",
-              }}
-            >
+            <div className="button-row">
               <button type="button" onClick={() => void onAction(connect)}>
                 {report && !report.ok
                   ? "Retry Connection"
@@ -262,69 +261,37 @@ export function SettingsView({
                 type="button"
                 onClick={() => void onAction(runDiagnostics)}
               >
-                Test Connection
+                Test model inference
               </button>
             </div>
             {report && (
-              <div
-                className="diagnostic-box"
-                style={{
-                  border: "1px solid var(--border, #ccc)",
-                  borderRadius: "6px",
-                  padding: "12px",
-                  margin: "8px 0 14px",
-                  background: "rgba(128, 128, 128, 0.05)",
-                }}
-              >
-                <div
-                  style={{
-                    fontWeight: 600,
-                    marginBottom: "8px",
-                    fontSize: "14px",
-                  }}
-                >
+              <details className="diagnostic-box">
+                <summary>
                   {report.ok
-                    ? "Provider Diagnostics: Connection available (see individual checks)"
-                    : "⚠️ Provider Diagnostics: Action Needed"}
-                </div>
-                <div
-                  style={{
-                    display: "grid",
-                    gridTemplateColumns: "auto 1fr",
-                    gap: "4px 12px",
-                    fontSize: "12px",
-                    marginBottom: "10px",
-                    paddingBottom: "8px",
-                    borderBottom: "1px solid var(--border, #ddd)",
-                  }}
-                >
-                  <span style={{ fontWeight: 600 }}>Selected Provider:</span>
-                  <span>{report.provider}</span>
-                  <span style={{ fontWeight: 600 }}>Model Name:</span>
-                  <span>{report.model}</span>
-                  <span style={{ fontWeight: 600 }}>API Endpoint:</span>
-                  <code>{report.endpoint}</code>
-                  <span style={{ fontWeight: 600 }}>Connection Status:</span>
-                  <span>{report.connectionStatus}</span>
-                  <span style={{ fontWeight: 600 }}>Origin/CORS Status:</span>
-                  <span>{report.corsStatus}</span>
-                  <span style={{ fontWeight: 600 }}>Model Availability:</span>
-                  <span>{report.modelStatus}</span>
-                  <span style={{ fontWeight: 600 }}>Inference Test:</span>
-                  <span>{report.inferenceStatus}</span>
-                </div>
-                <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+                    ? "Connection diagnostics"
+                    : "Connection diagnostics need attention"}
+                </summary>
+                <dl className="diagnostic-summary">
+                  <dt>Provider</dt>
+                  <dd>{report.provider}</dd>
+                  <dt>Model Name</dt>
+                  <dd>{report.model}</dd>
+                  <dt>API Endpoint</dt>
+                  <dd>
+                    <code>{report.endpoint}</code>
+                  </dd>
+                  <dt>Connection Status</dt>
+                  <dd>{report.connectionStatus}</dd>
+                  <dt>Origin/CORS Status</dt>
+                  <dd>{report.corsStatus}</dd>
+                  <dt>Model Availability</dt>
+                  <dd>{report.modelStatus}</dd>
+                  <dt>Inference Test</dt>
+                  <dd>{report.inferenceStatus}</dd>
+                </dl>
+                <ul className="diagnostic-steps">
                   {report.steps.map((s, idx) => (
-                    <li
-                      key={idx}
-                      style={{
-                        fontSize: "12px",
-                        margin: "3px 0",
-                        display: "flex",
-                        alignItems: "flex-start",
-                        gap: "6px",
-                      }}
-                    >
+                    <li key={idx}>
                       <span>
                         {s.status === "pass"
                           ? "🟢"
@@ -338,22 +305,8 @@ export function SettingsView({
                     </li>
                   ))}
                 </ul>
-              </div>
+              </details>
             )}
-            <ModelSelector
-              provider={form.provider}
-              onModelChange={async (m, ctx) => {
-                const nextProvider = {
-                  ...selectModel(form, m),
-                  ...(ctx ? { contextWindow: ctx } : {}),
-                };
-                setForm({ ...form, provider: nextProvider });
-                await onSave({ ...form, provider: nextProvider });
-                setMessage(`Switched active model to ${m}.`);
-              }}
-              onError={(err) => setMessage(err)}
-              onNotice={(not) => setMessage(not)}
-            />
             {modelList.length > 0 && (
               <label>
                 Discovered models
@@ -389,35 +342,11 @@ export function SettingsView({
             <label>
               Chat model
               <input
-                list="models"
                 value={form.provider.model}
                 placeholder="Discover or enter a model ID"
                 onChange={(e) => provider(selectModel(form, e.target.value))}
               />
-              <datalist id="models">
-                {modelList.map((m) => (
-                  <option key={m} value={m} />
-                ))}
-              </datalist>
             </label>
-            <label>
-              Context window (tokens)
-              <input
-                type="number"
-                min={2048}
-                max={Number.MAX_SAFE_INTEGER}
-                step={1024}
-                value={form.provider.contextWindow}
-                onChange={(e) =>
-                  provider({ contextWindow: Number(e.target.value) })
-                }
-              />
-            </label>
-            <p className="muted">
-              Configure the effective runtime window, not just the advertised
-              maximum. Output and safety reserves adapt to this window and can
-              be configured below. No source content is silently dropped.
-            </p>
             <InferenceSettings provider={form.provider} update={provider} />
             <details
               open={

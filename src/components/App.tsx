@@ -19,7 +19,6 @@ import {
   Plus,
   FileText,
   Search,
-  ShieldCheck,
   ExternalLink,
   RotateCcw,
   Clock,
@@ -120,6 +119,7 @@ export function App({
   }, [state?.selectionAction]);
   const [cooldown, setCooldown] = useState<number>(0);
   const isSubmitting = useRef(false);
+  const actionFocus = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
     if (
@@ -151,6 +151,8 @@ export function App({
   const act = async (action: () => Promise<void>) => {
     if (isSubmitting.current) return;
     isSubmitting.current = true;
+    if (document.activeElement instanceof HTMLElement)
+      actionFocus.current = document.activeElement;
     setError("");
     setNotice("");
     setLoading(true);
@@ -174,6 +176,9 @@ export function App({
       return "Cloud";
     }
   })();
+  const draftLocation = draft
+    ? endpointInfo(draft.provider.endpoint).location
+    : undefined;
   async function extract(ids?: number[]) {
     const tab = ids ? undefined : await pageTab();
     const selected =
@@ -231,14 +236,12 @@ export function App({
         <span className="brand-mark">
           <BookOpen size={19} />
         </span>
-        <div>
-          <strong>SAGE</strong>
-          <span className="eyebrow">PRIVATE RESEARCH</span>
-        </div>
+        <strong>SAGE</strong>
       </div>
       <div className="header-actions">
         <button
           className="icon"
+          title="Toggle theme"
           aria-label="Toggle theme"
           onClick={() =>
             void act(async () => {
@@ -257,6 +260,7 @@ export function App({
         {surface === "popup" && (
           <button
             className="icon"
+            title="Open workspace"
             aria-label="Open workspace"
             onClick={() => void act(openWorkspace)}
           >
@@ -266,6 +270,7 @@ export function App({
         {surface !== "options" && (
           <button
             className="icon"
+            title="Settings"
             aria-label="Settings"
             onClick={() => void chrome.runtime.openOptionsPage()}
           >
@@ -303,40 +308,29 @@ export function App({
   return (
     <main className={`app ${surface}`}>
       {header}
-      <div
-        className="provider-strip"
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          flexWrap: "wrap",
-          gap: "6px",
-        }}
-      >
-        <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
-          <span className={`privacy ${location.toLowerCase()}`}>
-            <span /> {location}
-          </span>
-          <span className="muted" style={{ fontSize: "12px" }}>
-            {settings.provider.kind}
-          </span>
+      {surface !== "options" && (
+        <div className="provider-strip">
+          <div className="provider-identity">
+            <span className={`privacy ${location.toLowerCase()}`}>
+              <span aria-hidden="true" /> {location} AI
+            </span>
+            <span>{settings.provider.kind}</span>
+          </div>
+          <ModelSelector
+            key={settings.provider.kind + settings.provider.endpoint}
+            provider={settings.provider}
+            onModelChange={async (model) => {
+              const updated = await rpc<Settings>({
+                type: "switchModel",
+                model,
+              });
+              setState((previous) =>
+                previous ? { ...previous, settings: updated } : previous,
+              );
+            }}
+          />
         </div>
-        <ModelSelector
-          provider={settings.provider}
-          compact={true}
-          onModelChange={async (newModel, ctx) => {
-            const updated = await rpc<Settings>({
-              type: "switchModel",
-              model: newModel,
-              contextWindow: ctx,
-            });
-            setState((prev) => (prev ? { ...prev, settings: updated } : prev));
-            setNotice(`Switched model to ${newModel}.`);
-          }}
-          onError={setError}
-          onNotice={setNotice}
-        />
-      </div>
+      )}
       {error && (
         <div className="alert" role="alert">
           {error}
@@ -384,30 +378,13 @@ export function App({
           )}
           {(workspace === "Page" || workspace === "Research") && (
             <>
-              <section className="intro">
-                <div className="eyebrow">
-                  {workspace === "Research"
-                    ? "BRING YOUR SOURCES TOGETHER"
-                    : "A LITTLE CLARITY, ON DEMAND"}
-                </div>
-                <h1>
-                  {workspace === "Research"
-                    ? "Find the bigger picture."
-                    : "Understand what matters."}
-                </h1>
-                <p>
-                  {workspace === "Research"
-                    ? "Compare perspectives. Inspect the evidence. Keep control of your context."
-                    : "Read deeply, ask better questions, and keep your research yours."}
-                </p>
-              </section>
+              <h1 className="workspace-title">
+                {workspace === "Research" ? "Research" : "Page workspace"}
+              </h1>
               {!settings.onboarded && (
                 <div className="notice">
-                  <strong>Start with a local model.</strong>
-                  <p>
-                    Connect Ollama or another provider in Settings. No account
-                    required.
-                  </p>
+                  <strong>Connect a model to get started.</strong>
+                  <p>Choose Local AI or Cloud AI in Settings.</p>
                   <button onClick={() => void chrome.runtime.openOptionsPage()}>
                     Set up SAGE <ExternalLink size={14} />
                   </button>
@@ -538,7 +515,11 @@ export function App({
                       })
                     }
                   >
-                    {sources.length ? "Refresh" : "Extract"}
+                    {sources[0]?.kind === "pdf" || sources[0]?.kind === "docx"
+                      ? "Use current page"
+                      : sources.length
+                        ? "Refresh"
+                        : "Extract"}
                   </button>
                 </section>
               )}
@@ -567,12 +548,12 @@ export function App({
                     {cooldown > 0 ? `Cooldown (${cooldown}s)` : "Summarize"}
                   </button>
                   <button
-                    className="icon"
+                    className="import-document"
                     title="Import PDF or DOCX"
                     aria-label="Import PDF or DOCX"
                     onClick={() => file.current?.click()}
                   >
-                    <FileText size={18} />
+                    <FileText size={16} /> Import
                   </button>
                 </div>
               )}
@@ -620,18 +601,21 @@ export function App({
                   e.target.value = "";
                 }}
               />
-              <label className="followup">
-                <input
-                  type="checkbox"
-                  checked={longContent}
-                  onChange={(e) => {
-                    setLongContent(e.target.checked);
-                    setFollowup(false);
-                  }}
-                />
-                Process oversized context in batches (review request count
-                first)
-              </label>
+              <details className="context-options">
+                <summary>Processing options</summary>
+                <label className="followup">
+                  <input
+                    type="checkbox"
+                    checked={longContent}
+                    onChange={(e) => {
+                      setLongContent(e.target.checked);
+                      setFollowup(false);
+                    }}
+                  />
+                  Process oversized context in batches (review request count
+                  first)
+                </label>
+              </details>
               {sources.length > 0 && (
                 <details className="context">
                   <summary>
@@ -719,12 +703,13 @@ export function App({
                       {job.status === "running"
                         ? "GENERATING"
                         : job.status.toUpperCase()}{" "}
-                      · SAGE
                     </span>
                     <div className="header-actions">
                       <button
                         className="icon"
+                        title="Copy output"
                         aria-label="Copy output"
+                        disabled={!job.output}
                         onClick={() =>
                           void act(async () => {
                             await navigator.clipboard.writeText(
@@ -738,8 +723,9 @@ export function App({
                       </button>
                       <button
                         className="icon"
+                        title="Regenerate"
                         aria-label="Regenerate"
-                        disabled={running}
+                        disabled={running || loading || cooldown > 0}
                         onClick={() =>
                           void act(async () => {
                             setFollowup(false);
@@ -761,6 +747,7 @@ export function App({
                       </button>
                       <button
                         className="text-button"
+                        disabled={!job.output}
                         onClick={() => exportJob(job)}
                       >
                         Export
@@ -858,20 +845,7 @@ export function App({
                     <div className="alert" role="alert">
                       <p style={{ margin: 0 }}>{job.error}</p>
                       {cooldown > 0 && (
-                        <div
-                          style={{
-                            display: "inline-flex",
-                            alignItems: "center",
-                            gap: "6px",
-                            fontSize: "12px",
-                            fontWeight: 600,
-                            padding: "4px 8px",
-                            borderRadius: "4px",
-                            background: "rgba(221, 107, 32, 0.15)",
-                            color: "#dd6b20",
-                            marginTop: "8px",
-                          }}
-                        >
+                        <div className="cooldown">
                           <Clock size={13} /> Rate limit cooldown active:{" "}
                           {cooldown}s remaining before you can retry
                         </div>
@@ -991,19 +965,10 @@ export function App({
                   </div>
                 </section>
               ) : (
-                <div className="empty">
-                  <BookOpen size={28} />
-                  <h3>Your next insight starts here.</h3>
-                  <p>
-                    Summarize a page or ask a question.
-                    <br />
-                    You’ll review exactly what SAGE sends.
-                  </p>
-                  <div className="privacy-note">
-                    <ShieldCheck size={14} /> No telemetry. No automatic cloud
-                    sharing.
-                  </div>
-                </div>
+                <p className="empty">
+                  Summarize a source or ask a question. You’ll review what SAGE
+                  sends.
+                </p>
               )}
               <section className="composer">
                 <label className="sr-only" htmlFor="question">
@@ -1057,7 +1022,6 @@ export function App({
                     {sources.length
                       ? `${sources.length} selected source${sources.length > 1 ? "s" : ""}`
                       : "Current page"}{" "}
-                    · {location.toLowerCase()}
                   </span>
                   {running ? (
                     <button
@@ -1073,8 +1037,9 @@ export function App({
                   ) : (
                     <button
                       className="primary icon"
+                      title="Review and send question"
                       aria-label="Review and send question"
-                      disabled={loading || cooldown > 0}
+                      disabled={loading || cooldown > 0 || !question.trim()}
                       onClick={() => void act(() => prepare(question))}
                     >
                       <ArrowUp size={18} />
@@ -1097,8 +1062,7 @@ export function App({
           {workspace === "Skills" && (
             <section>
               <div className="intro">
-                <div className="eyebrow">YOUR REPEATABLE THINKING TOOLS</div>
-                <h1>A skill for every question.</h1>
+                <h1>Skills</h1>
                 <p>Local prompt templates. Run only when you choose.</p>
               </div>
               <div className="toolbar">
@@ -1293,8 +1257,7 @@ export function App({
           {workspace === "History" && (
             <section>
               <div className="intro">
-                <div className="eyebrow">STORED ON THIS DEVICE</div>
-                <h1>Pick up the thread.</h1>
+                <h1>History</h1>
                 <p>
                   {settings.history
                     ? `History enabled · ${settings.retentionDays} day retention · up to 50 conversations.`
@@ -1384,22 +1347,21 @@ export function App({
           )}
         </>
       )}
-      <footer>
-        Your Private AI Research Companion <span>○ SAGE</span>
-      </footer>
       {draft && (
-        <Dialog onClose={() => setDraft(undefined)}>
+        <Dialog returnFocus={actionFocus} onClose={() => setDraft(undefined)}>
           <div className="eyebrow">PRIVACY INSPECTOR</div>
-          <h2 id="inspector-title">Review before you send.</h2>
+          <h2 id="inspector-title" tabIndex={-1}>
+            Review before you send.
+          </h2>
           {error && (
             <p className="alert" role="alert">
               {error}
             </p>
           )}
-          <p className={location === "Local" ? "notice" : "alert"}>
-            {location === "Local"
+          <p className={draftLocation === "Local" ? "notice" : "alert"}>
+            {draftLocation === "Local"
               ? "This request goes to a loopback endpoint on your device. The server’s own handling is outside SAGE’s control."
-              : `This content will leave your device for a ${location.toLowerCase()} endpoint. Review the provider’s data handling before continuing.`}
+              : `This content will leave your device for a ${draftLocation?.toLowerCase()} endpoint. Review the provider’s data handling before continuing.`}
           </p>
           <dl>
             <dt>Provider</dt>
@@ -1481,7 +1443,7 @@ export function App({
           <div className="toolbar">
             <button
               className="primary"
-              autoFocus
+
               disabled={loading || cooldown > 0}
               onClick={() =>
                 void act(async () => {

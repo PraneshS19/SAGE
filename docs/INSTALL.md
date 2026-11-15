@@ -10,7 +10,7 @@ SAGE 0.1.3 is a Functional Alpha. You need a Chromium browser that allows unpack
 ## Update an existing installation
 
 1. Finish or cancel active work. Export any important conversations and retain a backup of the previous runtime files outside the loaded directory.
-2. In the browser extension manager, note the existing extension ID and loaded path. Keep the same extension entry and absolute folder. For the developer build, keep the existing `.output/chrome-mv3` path.
+2. In the browser extension manager, note the existing extension ID and loaded path. Keep the same extension entry and absolute folder. For the developer build, keep the folder currently loaded. New 0.1.3 builds use `.output/v0.1.3/chrome-mv3`.
 3. Unpack the new release into a staging folder first. Check that its root contains `manifest.json`. Replace the old runtime files in the existing loaded folder with the contents of the staging folder. Click **Reload** on the existing extension entry.
 4. Verify the extension ID, version, settings, skills and saved history before discarding the backup. If reload fails, restore the previous runtime files to the same path and reload again. Do not remove the extension to update it.
 

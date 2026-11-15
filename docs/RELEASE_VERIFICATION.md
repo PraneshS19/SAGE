@@ -76,3 +76,13 @@ The public copy uses GitHub noreply metadata, retains two development commits, a
 Public-copy ZIP SHA-256: `ae59a505042e9dbd6d8c566eb33fc13882ea339a6546014ece228d6cdc396f33`.
 
 Publishing, hosted CI and release downloads require the separately authorized GitHub step. Live OpenRouter, GPT-OSS 120B, macOS and Linux remain unverified for this milestone.
+
+## UI refinement verification
+
+- TypeScript, ESLint, production packaging, and 113 unit and integration tests passed. Two opt-in Vitest tests were skipped. Helium, Edge and Brave each passed 15 controlled browser cases and skipped their opt-in live test. Cases include PDF and DOCX import, preserved source identities and citations, provider selection, history and privacy review.
+- The final extracted ZIP completed seven separate live requests in Helium. Phi-3 streamed a page summary and follow-up. Qwen streamed after an explicit model switch and completed DOCX, text PDF and cross-tab workflows. Ollama recovered after its isolated process restarted. History was restored after a browser restart. Cancelling cloud review sent no request, and no nonlocal extension requests were observed.
+- A real Helium toolbar click opened the packaged popup. The native selection menu opened the side panel and handed off Explain Selection. The controlled browsers also exercised the full-tab fallback.
+- Reviewed light and dark screenshots and verified 320 px popup, side-panel and settings layouts. Keyboard checks exercised the model disclosure, focus at the privacy review heading, Escape dismissal and focus restoration. A 360 px packaged popup displayed a 12-section Markdown fixture with tables without page-level horizontal overflow. This covers the exercised surfaces and does not establish full assistive-technology or WCAG conformance. [Screenshot gallery](PRODUCT_AUDIT.md#visual-verification-gallery)
+- The package verifier found 22 allowed runtime files. npm audit reported zero known vulnerabilities. The provider configuration, permission model and explicit cloud consent remain in effect.
+
+The refined Functional Alpha archive has SHA-256 `cea7c7c48e89fb3029b80da637992f05b1104a85ce03b2b1ad21f2ae07eb2cf6`. Model-dependent factual grounding, citation quality, long-document synthesis, live OpenRouter, GPT-OSS 120B and non-Windows builds remain outside verified release scope.

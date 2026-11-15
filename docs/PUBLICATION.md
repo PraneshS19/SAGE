@@ -12,12 +12,12 @@ Use `main` as the default branch. If available, enable private vulnerability rep
 
 ## Publication procedure
 
-Only after final approval, recheck the exact destination, ensure refs are still empty and push normally from the sanitized repository:
+Only after final approval, recheck the exact destination, ensure refs are still empty and push the verified refinement branch to the remote default branch from the sanitized repository. The local `main` remains at the previously verified baseline.
 
 ```sh
 git remote get-url origin
 git ls-remote origin
-git push -u origin main
+git push -u origin refactor/final-ui-polish:main
 ```
 
 If refs unexpectedly appear, inspect and integrate them first. Create a GitHub Release for `v0.1.3` separately after verifying the pushed commit. Label it Functional Alpha and attach `sage-extension-0.1.3.zip`, `INSTALL.md`, `QUICK_START.md` and a checksum for the downloadable files. The full distribution checksum also includes files in the unpacked directory. Verification scope and limitations remain in the [release verification report](RELEASE_VERIFICATION.md).
